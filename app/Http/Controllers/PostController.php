@@ -71,22 +71,30 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        // Handle image upload if provided
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $newImageName = time() . '_' . $image->getClientOriginalName();
-            $imagePath = $image->storeAs('uploads/posts', $newImageName, 'public'); // Use Laravel's storage system
-            $post->image = 'storage/' . $imagePath; // Save the public storage path
-            $post->save();
+        try {
+            // Handle image upload if provided
+            if ($request->hasFile('image')) {
+                if ($post->image && File::exists(public_path($post->image))) {
+                    File::delete(public_path($post->image));
+                }
+                $image = $request->file('image');
+                $newImageName = time() . '_' . $image->getClientOriginalName();
+                $imagePath = $image->storeAs('uploads/posts', $newImageName, 'public'); // Use Laravel's storage system
+                $post->image = 'storage/' . $imagePath; // Save the public storage path
+                $post->save();
+            }
+
+            // Update post attributes
+            $post->update([
+                'title' => $request->title,
+                'content' => $request->content,
+            ]);
+
+            return redirect()->route('posts.create');
+        } catch (\Throwable $th) {
+            return redirect()->route('posts.create')->with('errors',$th->getMessage());
         }
-
-        // Update post attributes
-        $post->update([
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
-
-        return redirect()->route('posts.create');
+        
     }
 
 

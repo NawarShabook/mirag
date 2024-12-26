@@ -6,9 +6,9 @@
             <img src="/brand/icon.png" class="d-inline" height="75px" alt="logo-sera"> مـيـراج
         </a>
         <div class="link">
-            <a class="p-2 p-lg-3 a-link bg-active" title="الصفحة الرئيسية" aria-current="page" href="#"><i
+            <a class="p-2 p-lg-3 a-link bg-active" title="الصفحة الرئيسية" aria-current="page" href="/"><i
                     class="fas fa-home"></i></a>
-            <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="myprofile.html"><i
+            <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="#"><i
                     class="fas fa-user"></i></a>
         </div>
     </div>

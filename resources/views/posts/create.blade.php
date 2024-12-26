@@ -62,7 +62,7 @@
             <tbody>
               @foreach ($posts as $post)
                 <tr>
-                  <td>{{$post->title}}</td>
+                  <td><a href="{{route('posts.show',$post)}}" style="color: inherit">{{$post->title}}</a></td>
                   <td>{{$post->created_at->format('Y-m-d')}}</td>
                   <td><a href="{{route('posts.edit', $post)}}" class="label btn-shape bg-violet c-white btn-update arrow">تعديل</a></td>
                   <td>

@@ -403,71 +403,25 @@
                 <h3 class="color-primary fw-bold mb-4">الآليات الثقيلة والنقل :</h3>
             </div>
             <div class="row justify-content-center">
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>MIRAG Company</p>
-                        </div>
-                        <div class="icon text-center">
-                            <img decoding="async" src="imgs/wheel-bulldozer.png" width="100" alt="wheel-bulldozer" />
-                        </div>
-                        <div class="name-ship">بلدوزر</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">طلب
-                                الآلية</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>MIRAG Company</p>
-                        </div>
-                        <div class="icon text-center">
-                            <img decoding="async" src="imgs/transfer-dump-truck.png" width="100"
-                                alt="transfer-dump-truck" />
-                        </div>
-                        <div class="name-ship">شاحنة</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">طلب
-                                الآلية</a>
+                @foreach ( $heavy_machines as $machine )
+                    <div class="col-lg-3 mb-3">
+                        <div class="file">
+                            <div class="info-button border-0">
+                                <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
+                                <p>MIRAG Company</p>
+                            </div>
+                            <div class="icon text-center">
+                                <img decoding="async" src="{{asset($machine->image)}}" width="100" alt="wheel-bulldozer" />
+                            </div>
+                            <div class="name-ship">{{$machine->name}}</div>
+                            <div class="info-between">
+                                <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">طلب
+                                    الآلية</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>MIRAG Company</p>
-                        </div>
-                        <div class="icon text-center">
-                            <img decoding="async" src="imgs/track-loader.png" width="100" alt="track-loader" />
-                        </div>
-                        <div class="name-ship">بوك</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">طلب
-                                الآلية</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>MIRAG Company</p>
-                        </div>
-                        <div class="icon text-center">
-                            <img decoding="async" src="imgs/fuel-truck.png" width="100" alt="fuel-truck" />
-                        </div>
-                        <div class="name-ship">صهريج ماء</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">طلب
-                                الآلية</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+                
             </div>
         </div>
     </section>
@@ -483,79 +437,24 @@
             </div>
             <div class="row justify-content-center">
                 <div class="courses-page">
-                    <!-- Start Artical Work -->
-                    <div class="course">
-                        <a href="#"><img class="cover" src="imgs/blog-1.jpg" alt="صورة ضمن العمل" /></a>
-                        <a href="#"><img class="instructor" src="icon/electric.png" alt="electric" /></a>
-                        <p class="instructor2">2024/09/22</p>
-                        <div class="info-product">
+                    @foreach ($posts as $post)
+                        <!-- Start Artical Work -->
+                        <div class="course">
+                            <a href="#"><img class="cover" src="{{ asset($post->image) }}" alt="صورة ضمن العمل" /></a>
+                            <a href="#"><img class="instructor" src="icon/electric.png" alt="electric" /></a>
+                            <p class="instructor2">{{ $post->created_at->format('Y/m/d') }}</p>
+                            <div class="info-product">
 
-                            <h4 class="name-product">صيانة كهربائية</h4>
-                            <p class="description-product">
-                                قامت شركة ميراج لخدمات الصيانة المنزلية بإجراء عملية صيانة شاملة لعلبة الكهرباء في منزل
-                                الزبون. شملت الفحص الدقيق لجميع الأسلاك والمكونات الكهربائية، واستبدال الأجزاء التالفة،
-                                لضمان سلامة وكفاءة النظام الكهربائي في المنزل .
-                            </p>
+                                <h4 class="name-product">{{$post->title}}</h4>
+                                <p class="description-product">{{ \Illuminate\Support\Str::limit($post->content, 150, '...') }}</p>
+                            </div>
+                            <div class="info-between">
+                                <a href="{{route('posts.show', $post)}}" class="a-file">المزيد عن العمل</a>
+                            </div>
                         </div>
-                        <div class="info-between">
-                            <a href="article.html" class="a-file">المزيد عن العمل</a>
-                        </div>
-                    </div>
-                    <!-- End Artical Work -->
-                    <!-- Start Artical Work -->
-                    <div class="course">
-                        <a href="#"><img class="cover" src="imgs/blog-2.jpg" alt="صورة ضمن العمل" /></a>
-                        <a href="#"><img class="instructor" src="icon/plumber.png" alt="plumber" /></a>
-                        <p class="instructor2">2024/09/25</p>
-                        <div class="info-product">
-                            <h4 class="name-product">تمديدات صحية</h4>
-                            <p class="description-product">
-                                نفذت شركة ميراج لخدمات الصيانة المنزلية عملية تركيب حوض المغسلة في منزل الزبون. تضمنت
-                                العملية قياس المساحة بدقة، وتثبيت الحوض بشكل آمن، والتأكد من عدم وجود تسريبات. تم تسليم
-                                العمل بجودة عالية وبما يتناسب مع احتياجات الزبون .
-                            </p>
-                        </div>
-                        <div class="info-between">
-                            <a href="article.html" class="a-file">المزيد عن العمل</a>
-                        </div>
-                    </div>
-                    <!-- End Artical Work -->
-                    <!-- Start Artical Work -->
-                    <div class="course">
-                        <a href="#"><img class="cover" src="imgs/blog-3.jpg" alt="صورة ضمن العمل" /></a>
-                        <a href="#"><img class="instructor" src="icon/paint.png" alt="paint" /></a>
-                        <p class="instructor2">2024/10/02</p>
-                        <div class="info-product">
-                            <h4 class="name-product">دهان منزل</h4>
-                            <p class="description-product">
-                                قامت شركة ميراج لخدمات الصيانة المنزلية بعملية دهان جدران منزل الزبون. شملت العملية
-                                اختيار الألوان المناسبة، وتحضير السطح بشكل جيد، وتطبيق طبقات الطلاء بدقة. تم الانتهاء من
-                                العمل بأعلى معايير الجودة، مما أضفى لمسة جمالية جديدة على المنزل .
-                            </p>
-                        </div>
-                        <div class="info-between">
-                            <a href="article.html" class="a-file">المزيد عن العمل</a>
-                        </div>
-                    </div>
-                    <!-- End Artical Work -->
-                    <!-- Start Artical Work -->
-                    <div class="course">
-                        <a href="#"><img class="cover" src="imgs/blog-4.jpg" alt="صورة ضمن العمل" /></a>
-                        <a href="#"><img class="instructor" src="icon/washing.png" alt="washing" /></a>
-                        <p class="instructor2">2024/10/04</p>
-                        <div class="info-product">
-                            <h4 class="name-product">تصليح غسالات</h4>
-                            <p class="description-product">
-                                قامت شركة ميراج لخدمات الصيانة المنزلية بعملية تصليح الغسالة في منزل الزبون. شملت
-                                العملية تشخيص المشكلة بدقة، واستبدال الأجزاء التالفة، وضبط الإعدادات. تم اختبار الغسالة
-                                بعد الإصلاح لضمان عملها بكفاءة، مما أعاد الراحة للزبون .
-                            </p>
-                        </div>
-                        <div class="info-between">
-                            <a href="article.html" class="a-file">المزيد عن العمل</a>
-                        </div>
-                    </div>
-                    <!-- End Artical Work -->
+                        <!-- End Artical Work -->
+                    @endforeach
+                    
                 </div>
             </div>
             <div class="row">

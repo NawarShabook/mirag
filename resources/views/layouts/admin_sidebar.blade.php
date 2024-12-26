@@ -27,7 +27,7 @@
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 rad-6 p-10" href="heavy.html">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="{{route('heavy_machines.create')}}">
           <i class="fas fa-snowplow fa-fw"></i>
           <span>الآليات الثقيلة</span>
         </a>
@@ -45,7 +45,7 @@
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 rad-6 p-10" href="/index.html">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="/">
           <i class="fa-solid fa-globe fa-fw"></i>
           <span>عرض الموقع</span>
         </a>

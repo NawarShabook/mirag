@@ -8,7 +8,7 @@
     <title>@yield('title', 'ميراج')</title>
 
     <!-- favicon -->
-    <link rel="icon" type="image/png" href="/brand/icon.png">
+    <link rel="icon" type="/image/png" href="{{asset('brand/icon.png')}}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />

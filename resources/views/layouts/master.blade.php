@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@yield('title', 'ميراج')</title>
   <!-- favicon -->
-  <link rel="icon" type="/image/png" href="imgs/icon.png">
+  <link rel="icon" type="/image/png" href="{{asset('brand/icon.png')}}">
   <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/framework.css') }}">
   <link rel="stylesheet" href="{{ asset('css/master.css') }}">

@@ -19,7 +19,7 @@
             @endif
             <p class="p-10 rad-10 m-20 bg-red c-white">حدث خطأ ما !</p>
           @endif
-          <form action="{{route('posts.update', $post)}}" method="post">
+          <form action="{{route('posts.update', $post)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-15">
