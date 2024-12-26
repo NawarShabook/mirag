@@ -178,145 +178,26 @@
                 <h3 class="color-primary fw-bold mb-4">الورشات المتاحة لدينا :</h3>
             </div>
             <div class="row justify-content-center">
-
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-bottom">
-                            <i class="fas fa-shapes icon-file mb-2"></i>
-                            <p>MIRAG Company</p>
-                        </div>
-                        <p class="mt-3">عدد العمال : 2</p>
-                        <div class="icon text-center">
-                            <img decoding="async" src="warshat/Electrician-Mirag.png" width="200" alt="Electrician" />
-                        </div>
-                        <div class="name-ship">الصيانة الكهربائية</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal">طلب
-                                الورشة</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-bottom">
-                            <i class="fas fa-shapes icon-file mb-2"></i>
-                            <p>MIRAG Company</p>
-                        </div>
-                        <p class="mt-3">عدد العمال : 3</p>
-                        <div class="icon text-center">
-                            <img decoding="async" src="warshat/plumber-Mirag.png" width="200" alt="plumber" />
-                        </div>
-                        <div class="name-ship">التمديدات الصحية</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal">طلب
-                                الورشة</a>
+                @foreach ($workshops as $workshop )
+                    <div class="col-lg-3 mb-3">
+                        <div class="file">
+                            <div class="info-button border-bottom">
+                                <i class="fas fa-shapes icon-file mb-2"></i>
+                                <p>MIRAG Company</p>
+                            </div>
+                            <p class="mt-3">عدد العمال : {{$workshop->workers_count}}</p>
+                            <div class="icon text-center">
+                                <img decoding="async" src="{{asset($workshop->image)}}" width="200" alt="صورة الورشة" />
+                            </div>
+                            <div class="name-ship">{{$workshop->name}}</div>
+                            <div class="info-between">
+                                <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal">طلب
+                                    الورشة</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-bottom">
-                            <i class="fas fa-shapes icon-file mb-2"></i>
-                            <p>MIRAG Company</p>
-                        </div>
-                        <p class="mt-3">عدد العمال : 3</p>
-                        <div class="icon text-center">
-                            <img decoding="async" src="warshat/painting-Mirag.png" width="200" alt="painting" />
-                        </div>
-                        <div class="name-ship">الطلاء والعزل</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal">طلب
-                                الورشة</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-bottom">
-                            <i class="fas fa-shapes icon-file mb-2"></i>
-                            <p>MIRAG Company</p>
-                        </div>
-                        <p class="mt-3">عدد العمال : 5</p>
-                        <div class="icon text-center">
-                            <img decoding="async" src="warshat/building-Mirag.png" width="200" alt="building" />
-                        </div>
-                        <div class="name-ship">البناء والتأسيس</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal">طلب
-                                الورشة</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-bottom">
-                            <i class="fas fa-shapes icon-file mb-2"></i>
-                            <p>MIRAG Company</p>
-                        </div>
-                        <p class="mt-3">عدد العمال : 2</p>
-                        <div class="icon text-center">
-                            <img decoding="async" src="warshat/Tileder-Mirag.png" width="200" alt="Tileder-Mirag" />
-                        </div>
-                        <div class="name-ship">البلاط والسيراميك</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal">طلب
-                                الورشة</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-bottom">
-                            <i class="fas fa-shapes icon-file mb-2"></i>
-                            <p>MIRAG Company</p>
-                        </div>
-                        <p class="mt-3">عدد العمال : 2</p>
-                        <div class="icon text-center">
-                            <img decoding="async" src="warshat/rock-Mirag.png" width="200" alt="Tileder-Mirag" />
-                        </div>
-                        <div class="name-ship">حجر ورخام</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal">طلب
-                                الورشة</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-bottom">
-                            <i class="fas fa-shapes icon-file mb-2"></i>
-                            <p>MIRAG Company</p>
-                        </div>
-                        <p class="mt-3">عدد العمال : 3</p>
-                        <div class="icon text-center">
-                            <img decoding="async" src="warshat/sun-energy-Mirag.png" width="200"
-                                alt="sun-energy-Mirag" />
-                        </div>
-                        <div class="name-ship">الطاقة الشمسية</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal">طلب
-                                الورشة</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="file">
-                        <div class="info-button border-bottom">
-                            <i class="fas fa-shapes icon-file mb-2"></i>
-                            <p>MIRAG Company</p>
-                        </div>
-                        <p class="mt-3">عدد العمال : 4</p>
-                        <div class="icon text-center">
-                            <img decoding="async" src="warshat/clean-Mirag.png" width="200" alt="clean-Mirag" />
-                        </div>
-                        <div class="name-ship">التنظيف والتعزيل</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal">طلب
-                                الورشة</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+                
             </div>
         </div>
     </section>

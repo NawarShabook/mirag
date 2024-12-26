@@ -21,7 +21,7 @@
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 rad-6 p-10" href="workshops.html">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="{{route('workshops.create')}}">
           <i class="fas fa-check-double fa-fw"></i>
           <span>الورشات</span>
         </a>
@@ -33,7 +33,7 @@
         </a>
       </li>
       <li>
-        <a class="active d-flex align-center fs-14 rad-6 p-10" href="articles.html">
+        <a class="active d-flex align-center fs-14 rad-6 p-10" href="{{route('posts.create')}}">
           <i class="fa fa-newspaper fa-fw"></i>
           <span>الأخبار</span>
         </a>

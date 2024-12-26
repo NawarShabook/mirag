@@ -36,7 +36,7 @@
               <textarea class="close-message p-10 rad-6 d-block w-full mb-15" name="content" 
                 placeholder="إضافة معلومات عن الخبر">{{$post->content}}</textarea>
             </div>
-            <button role="submit" class="label btn-shape bg-blue c-white btn-h">تعديل الخبر</button>
+            <button type="submit" class="label btn-shape bg-blue c-white btn-h">تعديل الخبر</button>
           </form>
         </div>
         <!-- End Add Category Box -->

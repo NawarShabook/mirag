@@ -63,7 +63,7 @@
                             <form action="{{route('heavy_machines.destroy', $machine)}}" method="post" id="deleteForm" class="form-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button role='submit' class="label btn-shape bg-red c-white btn-delete arrow">حذف</button>
+                                <button type='submit' class="label btn-shape bg-red c-white btn-delete arrow">حذف</button>
                             </form>
                         </td>
                     </tr>

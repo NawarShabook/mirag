@@ -33,7 +33,7 @@
               <label class="fs-14 c-grey d-block mb-10" for="img">تعديل صورة الآلية 480*480</label>
               <input class="b-none bg-white border-ccc p-10 rad-6 d-block w-full" type="file" id="img" name="image"/>
             </div>
-            <button role="submit" class="label btn-shape bg-blue c-white btn-h">تعديل</button>
+            <button type="submit" class="label btn-shape bg-blue c-white btn-h">تعديل</button>
           </form>
         </div>
         <!-- End Edit Category Box -->
