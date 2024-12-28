@@ -48,7 +48,7 @@
                     <button input-val="location-val" class="label btn-shape bg-violet c-white  btn-h mr-10 update-setting-btn">تعديل</button>
                 </div>
                 <div class="box linkedin p-15 p-relative mb-10 between-flex">
-                    <i class="fas fa-envelope fa-2x c-white h-full center-flex"></i>
+                    <i class="center-flex fas fa-envelope fa-2x c-white h-full "></i>
                     <input class="b-none bg-none border-ccc p-10 rad-6 d-block w-full c-white" type="text"
                         id="email-val" value="{{$settings_array['email']??''}}" placeholder="username" />
                     <button input-val="email-val" class="label btn-shape bg-blue c-white btn-h mr-10 update-setting-btn">تعديل</button>

@@ -8,18 +8,26 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>@yield('title', 'ميراج')</title>
+
   <!-- favicon -->
-  <link rel="icon" type="/image/png" href="{{asset('brand/icon.png')}}">
-  <link rel="stylesheet" href="{{ asset('css/all_admin.min.css') }}">
+  <link rel="icon" type="image/png" href="{{asset('brand/icon.png')}}">
+  {{-- <link rel="stylesheet" href="{{ asset('css/all.min.css') }}"> --}}
   <link rel="stylesheet" href="{{ asset('css/framework.css') }}">
   <link rel="stylesheet" href="{{ asset('css/master.css') }}">
-  
+  <!-- Add Font Awesome CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
   <link
     href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
     rel="stylesheet">
     <style>
       .form-inline{
         display: inline;
+      }
+      .center-flex {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
       }
     </style>
     @yield('head')
