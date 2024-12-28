@@ -145,7 +145,14 @@
 
                 <div class="col-md-12">
                     <div class="tags">
-                        <a> <img src="icon/electric.png" alt="electric" data-bs-toggle="modal"
+                        @foreach ($maintenance_services as $service )
+
+                            <a style="cursor: pointer;"> <img src="{{asset($service->image)}}" alt="electric" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"></a>
+                            
+                        @endforeach
+
+                        {{-- <a> <img src="icon/electric.png" alt="electric" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"></a>
                         <a href="#"> <img src="icon/plumber.png" alt="plumber" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"></a>
@@ -162,7 +169,7 @@
                         <a href="#"> <img src="icon/paint.png" alt="paint" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"></a>
                         <a href="#"> <img src="icon/clean.png" alt="clean" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"></a>
+                                data-bs-target="#exampleModal"></a> --}}
                     </div>
                 </div>
             </center>
@@ -209,7 +216,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title color-primary" id="exampleModalLabel">الآليات الثقيلة</h5>
+                    <h5 class="modal-title color-primary" id="HeavyModalLabel">الآليات الثقيلة</h5>
                     <button type="button" class="btn-close color-primary border-0 noborder" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -296,8 +303,8 @@
                             </div>
                             <div class="name-ship">{{$machine->name}}</div>
                             <div class="info-between">
-                                <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">طلب
-                                    الآلية</a>
+                                <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                 heavy-name="{{$machine->name}}" onclick="heavyModal(this)">طلب الآلية</a>
                             </div>
                         </div>
                     </div>
@@ -422,4 +429,13 @@
         </div>
     </div>
     <!-- End Contact -->
+
+    @section('script')
+        <script>
+            function heavyModal(event){
+                heavyName=event.getAttribute('heavy-name');
+                document.getElementById('HeavyModalLabel').innerText=heavyName;
+            }
+        </script>
+    @endsection
 @endsection

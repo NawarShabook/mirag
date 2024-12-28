@@ -15,7 +15,7 @@
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 rad-6 p-10" href="maintenance-services.html">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="{{route('maintenance_services.create')}}">
           <i class="fa fa-hashtag fa-fw"></i>
           <span>خدمات الصيانة</span>
         </a>

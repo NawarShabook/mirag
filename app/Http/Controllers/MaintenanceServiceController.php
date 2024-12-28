@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HeavyMachine;
+use App\Models\MaintenanceService;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
-class HeavyMachineController extends Controller
+class MaintenanceServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return redirect()->route('heavy_machines.create');
+        //
     }
 
     /**
@@ -21,8 +20,8 @@ class HeavyMachineController extends Controller
      */
     public function create()
     {
-        $heavy_machines=HeavyMachine::latest()->get();
-        return view('heavy_machines.create',compact('heavy_machines'));
+        $maintenance_services = MaintenanceService::latest()->get();
+        return view('maintenance_services.create',compact('maintenance_services'));
     }
 
     /**
@@ -38,9 +37,9 @@ class HeavyMachineController extends Controller
         try {
             $image = $request->file('image');
             $newImageName = time() . '_' . $image->getClientOriginalName();
-            $imagePath = $image->storeAs('uploads/heavy_machines', $newImageName, 'public'); // Use Laravel's storage system
+            $imagePath = $image->storeAs('uploads/maintenance_services', $newImageName, 'public'); // Use Laravel's storage system
             //mass assignment
-            HeavyMachine::create([
+            MaintenanceService::create([
                 'name' => $request->name,
                 'image' => 'storage/' . $imagePath,
             ]);
@@ -49,13 +48,12 @@ class HeavyMachineController extends Controller
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());
         }
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(HeavyMachine $heavyMachine)
+    public function show(MaintenanceService $maintenanceService)
     {
         //
     }
@@ -63,15 +61,15 @@ class HeavyMachineController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(HeavyMachine $heavyMachine)
+    public function edit(MaintenanceService $maintenanceService)
     {
-        return view('heavy_machines.edit', ['heavyMachine' => $heavyMachine]);
+        return view('maintenance_services.edit', ['service' => $maintenanceService]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HeavyMachine $heavyMachine)
+    public function update(Request $request, MaintenanceService $maintenanceService)
     {
         $request->validate([
             'name' => 'required|string|max:50',
@@ -81,40 +79,39 @@ class HeavyMachineController extends Controller
         try {
             // Handle image upload if provided
             if ($request->hasFile('image')) {
-                if ($heavyMachine->image && File::exists(public_path($heavyMachine->image))) {
-                    File::delete(public_path($heavyMachine->image));
+                if ($maintenanceService->image && File::exists(public_path($maintenanceService->image))) {
+                    File::delete(public_path($maintenanceService->image));
                 }
                 $image = $request->file('image');
                 $newImageName = time() . '_' . $image->getClientOriginalName();
-                $imagePath = $image->storeAs('uploads/heavy_machines', $newImageName, 'public'); // Use Laravel's storage system
-                $heavyMachine->image = 'storage/' . $imagePath; // Save the public storage path
+                $imagePath = $image->storeAs('uploads/maintenance_services', $newImageName, 'public'); // Use Laravel's storage system
+                $maintenanceService->image = 'storage/' . $imagePath; // Save the public storage path
             }
-            $heavyMachine->name = $request->name;
-            $heavyMachine->save();
+            $maintenanceService->name = $request->name;
+            $maintenanceService->save();
 
-            return redirect()->route('heavy_machines.create');
+            return redirect()->route('maintenance_services.create');
         } catch (\Throwable $th) {
-            return redirect()->route('heavy_machines.create')->with('errors',$th->getMessage());
+            return redirect()->route('maintenance_services.create')->with('errors',$th->getMessage());
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HeavyMachine $heavyMachine)
+    public function destroy(MaintenanceService $maintenanceService)
     {
         try {
-            if ($heavyMachine->image && File::exists(public_path($heavyMachine->image))) {
-                File::delete(public_path($heavyMachine->image));
+            if ($maintenanceService->image && File::exists(public_path($maintenanceService->image))) {
+                File::delete(public_path($maintenanceService->image));
             }
     
-            // Delete the heavyMachine
-            $heavyMachine->delete();
+            // Delete the maintenanceService
+            $maintenanceService->delete();
     
-            return redirect()->back()->with('success', 'heavyMachine deleted successfully.');
+            return redirect()->back()->with('success', 'maintenance service deleted successfully.');
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());
         }
-        
     }
 }
