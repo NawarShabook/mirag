@@ -8,8 +8,23 @@
         <div class="link">
             <a class="p-2 p-lg-3 a-link bg-active" title="الصفحة الرئيسية" aria-current="page" href="/"><i
                     class="fas fa-home"></i></a>
-            <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="#"><i
+
+            @guest
+                @if (Route::has('login'))
+
+                    <a class="p-2 p-lg-3 a-link" title="تسجيل الدخول" aria-current="page" href="{{ route('login') }}">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                @endif
+
+                @if (Route::has('register'))
+                <a class="p-2 p-lg-3 a-link" title="إنشاء حساب" aria-current="page" href="{{ route('register') }}">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+
+                @endif
+            @else
+            <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="{{ route('profile') }}"><i
                     class="fas fa-user"></i></a>
+            @endguest
         </div>
     </div>
 </nav>

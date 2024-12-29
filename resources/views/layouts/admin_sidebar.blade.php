@@ -3,13 +3,13 @@
     <h3 class="p-relative txt-c mt-0">شركة ميراج</h3>
     <ul>
       <li>
-        <a class="d-flex align-center fs-14 rad-6 p-10" href="index.html">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="#index.html">
           <i class="fa-regular fa-chart-bar fa-fw"></i>
           <span>ملخص</span>
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 rad-6 p-10" href="requests.html">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="#requests.html">
           <i class="fa fa-lightbulb fa-fw"></i>
           <span>الطلبات</span>
         </a>
@@ -33,13 +33,13 @@
         </a>
       </li>
       <li>
-        <a class="active d-flex align-center fs-14 rad-6 p-10" href="{{route('posts.create')}}">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="{{route('posts.create')}}">
           <i class="fa fa-newspaper fa-fw"></i>
           <span>الأخبار</span>
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 rad-6 p-10" href="settings.html">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="{{route('settings')}}">
           <i class="fa-solid fa-user-shield fa-fw"></i>
           <span>إدارة المعلومات</span>
         </a>
