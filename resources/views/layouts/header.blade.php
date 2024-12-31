@@ -25,6 +25,12 @@
             <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="{{ route('profile') }}"><i
                     class="fas fa-user"></i></a>
             @endguest
+            
+            @isAdmin
+            <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="{{ route('settings') }}">
+                <i class="fa fa-cog" aria-hidden="true"></i></i></a>
+            @endisAdmin
+
         </div>
     </div>
 </nav>
