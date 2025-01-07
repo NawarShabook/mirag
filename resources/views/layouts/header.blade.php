@@ -16,16 +16,16 @@
                         <i class="fa fa-sign-in" aria-hidden="true"></i></a>
                 @endif
 
-                @if (Route::has('register'))
+                {{-- @if (Route::has('register'))
                 <a class="p-2 p-lg-3 a-link" title="إنشاء حساب" aria-current="page" href="{{ route('register') }}">
                     <i class="fa fa-user-plus" aria-hidden="true"></i></a>
 
-                @endif
+                @endif --}}
             @else
             <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="{{ route('profile') }}"><i
                     class="fas fa-user"></i></a>
             @endguest
-            
+
             @isAdmin
             <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="{{ route('settings') }}">
                 <i class="fa fa-cog" aria-hidden="true"></i></i></a>

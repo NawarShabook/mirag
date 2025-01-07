@@ -9,7 +9,7 @@
         </a>
       </li>
       <li>
-        <a class="d-flex align-center fs-14 rad-6 p-10" href="#requests.html">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="{{route('orders.index')}}">
           <i class="fa fa-lightbulb fa-fw"></i>
           <span>الطلبات</span>
         </a>

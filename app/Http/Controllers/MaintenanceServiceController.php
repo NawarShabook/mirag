@@ -33,7 +33,7 @@ class MaintenanceServiceController extends Controller
             'name' => 'required|string|max:50',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         try {
             $image = $request->file('image');
             $newImageName = time() . '_' . $image->getClientOriginalName();
@@ -44,7 +44,7 @@ class MaintenanceServiceController extends Controller
                 'image' => 'storage/' . $imagePath,
             ]);
             return back()->with('success','');
-            
+
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());
         }
@@ -105,10 +105,10 @@ class MaintenanceServiceController extends Controller
             if ($maintenanceService->image && File::exists(public_path($maintenanceService->image))) {
                 File::delete(public_path($maintenanceService->image));
             }
-    
+
             // Delete the maintenanceService
             $maintenanceService->delete();
-    
+
             return redirect()->back()->with('success', 'maintenance service deleted successfully.');
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());

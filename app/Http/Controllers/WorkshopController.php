@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 class WorkshopController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +35,7 @@ class WorkshopController extends Controller
             'workers_count' => 'required|int|min:1|max:50',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         try {
             $image = $request->file('image');
             $newImageName = time() . '_' . $image->getClientOriginalName();
@@ -46,8 +46,8 @@ class WorkshopController extends Controller
                 'workers_count' => $request->workers_count,
                 'image' => 'storage/' . $imagePath,
             ]);
-            return back()->with('success','');
-            
+            return back()->with('success','success');
+
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());
         }
@@ -111,10 +111,10 @@ class WorkshopController extends Controller
             if ($workshop->image && File::exists(public_path($workshop->image))) {
                 File::delete(public_path($workshop->image));
             }
-    
+
             // Delete the workshop
             $workshop->delete();
-    
+
             return redirect()->back()->with('success', 'workshop deleted successfully.');
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());

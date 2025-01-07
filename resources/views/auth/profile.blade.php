@@ -28,7 +28,7 @@
                                 <a class="text-white mb-4 h6"><i class="fa fa-earth ml-3 active"></i>المنطقة : {{$user->city}}</a>
                                 <a class="text-white mb-4 h6"><i
                                         class="fa fa-envelope ml-3 active"></i>{{$user->email}}</a>
-                                <a class="text-white mb-4 h6" href="change-password.html"><i
+                                <a class="text-white mb-4 h6" href="#change-password.html"><i
                                         class="fa fa-key ml-3 active"></i>********
                                     <span class="bg-white bg-danger p-1 rounded">تغيير كلمة السر</span></a>
 
@@ -50,17 +50,17 @@
                     <div class="all-requests">
                         <div class="boc requests">
                             <i class="fas fa-tools bg-active p-2 text-white fa-2x"></i>
-                            <span>طلبات الصيانة ( 1 طلب )</span>
+                            <span>طلبات الصيانة ( {{count($user_orders['maintenance_service'])}} طلب )</span>
                             <a class="requests-number " href="#maintenance-requests">انتقال</a>
                         </div>
                         <div class="boc requests">
                             <i class="fas fa-users bg-active p-2 text-white fa-2x"></i>
-                            <span>طلبات الورشات ( 2 طلب )</span>
+                            <span>طلبات الورشات ( {{count($user_orders['workshop'])}} طلب )</span>
                             <a class="requests-number " href="#workshop-requests">انتقال</a>
                         </div>
                         <div class="boc requests">
                             <i class="fas fa-snowplow bg-active p-2 text-white fa-2x"></i>
-                            <span>طلبات الآليات ( 1 طلب )</span>
+                            <span>طلبات الآليات ( {{count($user_orders['heavy_machine'])}} طلب )</span>
                             <a class="requests-number " href="#heavy-machinery-requests">انتقال</a>
                         </div>
                     </div>
@@ -82,144 +82,85 @@
                 <h3 class="color-primary fw-bold mb-4">قم بمتابعة طلبك بعناية :</h3>
             </div>
             <div class="row pt-3">
-                <div class="col-lg-6 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>2024/01/01 09:10 PM</p>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <p>الطلب</p>
-                                <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">1</p>
-                            </div>
 
-                            <div class="timeline-item">
-                                <p>قيد الإنتظار</p>
-                                <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">2</p>
-                            </div>
+                @foreach ($user_orders['maintenance_service'] as $order )
 
-                            <div class="timeline-item">
-                                <p>في الطريق</p>
-                                <div class="iconic"><i class="fas fa-angle-double-left"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon">3</p>
+                    <div class="col-lg-6 mb-3">
+                        <div class="file">
+                            <div class="info-button border-0">
+                                <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
+                                <p>{{$order->created_at}}</p>
                             </div>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <p>الطلب</p>
+                                    <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <br>
+                                    <p class="number-icon active-icon">1</p>
+                                </div>
 
-                            <div class="timeline-item">
-                                <p>تم الوصول</p>
-                                <div class="iconic"><i class="fas fa-check-circle"></i>
+                                <div class="timeline-item">
+                                    <p>قيد الإنتظار</p>
+                                    <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
+                                    </div>
+                                    <br>
+                                    <p class="number-icon active-icon">2</p>
                                 </div>
-                                <br>
-                                <p class="number-icon">4</p>
-                            </div>
-                        </div>
-                        <div class="name-ship">الصيانة الكهربائية</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">إلغاء
-                                الطلب</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-6 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>2024/01/01 09:10 PM</p>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <p>الطلب</p>
-                                <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
+                                <div class="timeline-item">
+                                    <p>في الطريق</p>
+                                    <div
+                                        @if ($order->status=='accepted' || $order->status=='completed')
+                                            class="iconic active-icon"
+                                        @else
+                                            class="iconic"
+                                        @endif
+                                    ><i class="fas fa-angle-double-left"></i>
+                                    </div>
+                                    <br>
+                                    <p
+                                        @if ($order->status=='accepted' || $order->status=='completed')
+                                            class="number-icon active-icon"
+                                        @else
+                                            class="number-icon"
+                                        @endif
+                                    >3</p>
                                 </div>
-                                <br>
-                                <p class="number-icon active-icon">1</p>
-                            </div>
 
-                            <div class="timeline-item">
-                                <p>قيد الإنتظار</p>
-                                <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
+                                <div class="timeline-item">
+                                    <p>تم الوصول</p>
+                                    <div
+                                        @if ($order->status=='completed')
+                                            class="iconic active-icon"
+                                        @else
+                                            class="iconic"
+                                        @endif
+                                    ><i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <br>
+                                    <p
+                                        @if ($order->status=='completed')
+                                            class="number-icon active-icon"
+                                        @else
+                                            class="number-icon"
+                                        @endif
+                                    >4</p>
                                 </div>
-                                <br>
-                                <p class="number-icon active-icon">2</p>
                             </div>
-
-                            <div class="timeline-item">
-                                <p>في الطريق</p>
-                                <div class="iconic active-icon"><i class="fas fa-angle-double-left"></i>
+                            <div class="name-ship">{{$order->maintenance_service->name}}</div>
+                            <form action="{{route('cancel_order', $order->id)}}" method="post" onsubmit="return confirm('هل أنت متأكد من إلغاء الطلب؟');">
+                                @method('PUT')
+                                @csrf
+                                <div class="info-between">
+                                <button type="submit" class="a-file" style="cursor: pointer"> إلغاءالطلب</button>
                                 </div>
-                                <br>
-                                <p class="number-icon active-icon">3</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>تم الوصول</p>
-                                <div class="iconic"><i class="fas fa-check-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon">4</p>
-                            </div>
-                        </div>
-                        <div class="name-ship">السباكة</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">إلغاء
-                                الطلب</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>2024/01/01 09:10 PM</p>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <p>الطلب</p>
-                                <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">1</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>قيد الإنتظار</p>
-                                <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">2</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>في الطريق</p>
-                                <div class="iconic active-icon"><i class="fas fa-angle-double-left"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">3</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>تم الوصول</p>
-                                <div class="iconic active-icon"><i class="fas fa-check-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">4</p>
-                            </div>
-                        </div>
-                        <div class="name-ship">الطاقة الشمسية</div>
-                        <div class="info-between">
+                            </form>
 
                         </div>
                     </div>
-                </div>
+                @endforeach
+
             </div>
             <!-- نهاية طلبات الصيانة -->
 
@@ -231,190 +172,81 @@
                 <h3 class="color-primary fw-bold mb-4">قم بمتابعة طلبك بعناية :</h3>
             </div>
             <div class="row pt-3">
-                <div class="col-lg-6 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>2024/01/01 09:10 PM</p>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <p>طلب الورشة</p>
-                                <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">1</p>
+                @foreach ($user_orders['workshop'] as $order )
+                    <div class="col-lg-6 mb-3">
+                        <div class="file">
+                            <div class="info-button border-0">
+                                <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
+                                <p>{{$order->created_at}}</p>
                             </div>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <p>الطلب</p>
+                                    <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <br>
+                                    <p class="number-icon active-icon">1</p>
+                                </div>
 
-                            <div class="timeline-item">
-                                <p>قيد الإنتظار</p>
-                                <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
+                                <div class="timeline-item">
+                                    <p>قيد الإنتظار</p>
+                                    <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
+                                    </div>
+                                    <br>
+                                    <p class="number-icon active-icon">2</p>
                                 </div>
-                                <br>
-                                <p class="number-icon active-icon">2</p>
-                            </div>
 
-                            <div class="timeline-item">
-                                <p>في الطريق</p>
-                                <div class="iconic"><i class="fas fa-angle-double-left"></i>
+                                <div class="timeline-item">
+                                    <p>في الطريق</p>
+                                    <div
+                                        @if ($order->status=='accepted' || $order->status=='completed')
+                                            class="iconic active-icon"
+                                        @else
+                                            class="iconic"
+                                        @endif
+                                    ><i class="fas fa-angle-double-left"></i>
+                                    </div>
+                                    <br>
+                                    <p
+                                        @if ($order->status=='accepted' || $order->status=='completed')
+                                            class="number-icon active-icon"
+                                        @else
+                                            class="number-icon"
+                                        @endif
+                                    >3</p>
                                 </div>
-                                <br>
-                                <p class="number-icon">3</p>
-                            </div>
 
-                            <div class="timeline-item">
-                                <p>تم الوصول</p>
-                                <div class="iconic"><i class="fas fa-check-circle"></i>
+                                <div class="timeline-item">
+                                    <p>تم الوصول</p>
+                                    <div
+                                        @if ($order->status=='completed')
+                                            class="iconic active-icon"
+                                        @else
+                                            class="iconic"
+                                        @endif
+                                    ><i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <br>
+                                    <p
+                                        @if ($order->status=='completed')
+                                            class="number-icon active-icon"
+                                        @else
+                                            class="number-icon"
+                                        @endif
+                                    >4</p>
                                 </div>
-                                <br>
-                                <p class="number-icon">4</p>
                             </div>
-                        </div>
-                        <div class="name-ship">ورشة عمارة</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">إلغاء
-                                الطلب</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>2024/01/01 09:10 PM</p>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <p>طلب الورشة</p>
-                                <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
+                            <div class="name-ship">{{$order->workshop->name}}</div>
+                            <form action="{{route('cancel_order', $order->id)}}" method="post" onsubmit="return confirm('هل أنت متأكد من إلغاء الطلب؟');">
+                                @method('PUT')
+                                @csrf
+                                <div class="info-between">
+                                <button type="submit" class="a-file" style="cursor: pointer"> إلغاءالطلب</button>
                                 </div>
-                                <br>
-                                <p class="number-icon active-icon">1</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>قيد الإنتظار</p>
-                                <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">2</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>في الطريق</p>
-                                <div class="iconic active-icon"><i class="fas fa-angle-double-left"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">3</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>تم الوصول</p>
-                                <div class="iconic"><i class="fas fa-check-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon">4</p>
-                            </div>
-                        </div>
-                        <div class="name-ship">ورشة حجر ورخام</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">إلغاء
-                                الطلب</a>
+                            </form>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>2024/01/01 09:10 PM</p>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <p>طلب الورشة</p>
-                                <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">1</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>قيد الإنتظار</p>
-                                <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">2</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>في الطريق</p>
-                                <div class="iconic active-icon"><i class="fas fa-angle-double-left"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">3</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>تم الوصول</p>
-                                <div class="iconic active-icon"><i class="fas fa-check-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">4</p>
-                            </div>
-                        </div>
-                        <div class="name-ship">ورشة البلاط والسيراميك</div>
-                        <div class="info-between">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>2024/01/01 09:10 PM</p>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <p>طلب الورشة</p>
-                                <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">1</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>قيد الإنتظار</p>
-                                <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">2</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>في الطريق</p>
-                                <div class="iconic active-icon"><i class="fas fa-angle-double-left"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">3</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>تم الوصول</p>
-                                <div class="iconic active-icon"><i class="fas fa-check-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">4</p>
-                            </div>
-                        </div>
-                        <div class="name-ship">ورشة التنظيف والتعزيل</div>
-                        <div class="info-between">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @endforeach
             <!-- نهاية طلبات الورشات -->
 
             <!-- بداية طلبات الآليات الثقيلة -->
@@ -425,99 +257,81 @@
                 <h3 class="color-primary fw-bold mb-4">قم بمتابعة طلبك بعناية :</h3>
             </div>
             <div class="row pt-3">
-                <div class="col-lg-6 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>2024/01/01 09:10 PM</p>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <p>طلب الورشة</p>
-                                <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">1</p>
+                @foreach ($user_orders['heavy_machine'] as $order )
+                    <div class="col-lg-6 mb-3">
+                        <div class="file">
+                            <div class="info-button border-0">
+                                <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
+                                <p>{{$order->created_at}}</p>
                             </div>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <p>الطلب</p>
+                                    <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <br>
+                                    <p class="number-icon active-icon">1</p>
+                                </div>
 
-                            <div class="timeline-item">
-                                <p>قيد الإنتظار</p>
-                                <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
+                                <div class="timeline-item">
+                                    <p>قيد الإنتظار</p>
+                                    <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
+                                    </div>
+                                    <br>
+                                    <p class="number-icon active-icon">2</p>
                                 </div>
-                                <br>
-                                <p class="number-icon active-icon">2</p>
-                            </div>
 
-                            <div class="timeline-item">
-                                <p>في الطريق</p>
-                                <div class="iconic"><i class="fas fa-angle-double-left"></i>
+                                <div class="timeline-item">
+                                    <p>في الطريق</p>
+                                    <div
+                                        @if ($order->status=='accepted' || $order->status=='completed')
+                                            class="iconic active-icon"
+                                        @else
+                                            class="iconic"
+                                        @endif
+                                    ><i class="fas fa-angle-double-left"></i>
+                                    </div>
+                                    <br>
+                                    <p
+                                        @if ($order->status=='accepted' || $order->status=='completed')
+                                            class="number-icon active-icon"
+                                        @else
+                                            class="number-icon"
+                                        @endif
+                                    >3</p>
                                 </div>
-                                <br>
-                                <p class="number-icon">3</p>
-                            </div>
 
-                            <div class="timeline-item">
-                                <p>تم الوصول</p>
-                                <div class="iconic"><i class="fas fa-check-circle"></i>
+                                <div class="timeline-item">
+                                    <p>تم الوصول</p>
+                                    <div
+                                        @if ($order->status=='completed')
+                                            class="iconic active-icon"
+                                        @else
+                                            class="iconic"
+                                        @endif
+                                    ><i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <br>
+                                    <p
+                                        @if ($order->status=='completed')
+                                            class="number-icon active-icon"
+                                        @else
+                                            class="number-icon"
+                                        @endif
+                                    >4</p>
                                 </div>
-                                <br>
-                                <p class="number-icon">4</p>
                             </div>
-                        </div>
-                        <div class="name-ship">بلدوزر</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">إلغاء
-                                الطلب</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 mb-3">
-                    <div class="file">
-                        <div class="info-button border-0">
-                            <img class="mb-1" decoding="async" src="brand/icon.png" width="40" alt="logo" />
-                            <p>2024/01/01 09:10 PM</p>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <p>طلب الورشة</p>
-                                <div class="iconic active-icon"><i class="fas fa-plus-circle"></i>
+                            <div class="name-ship">{{$order->heavy_machine->name}}</div>
+                            <form action="{{route('cancel_order', $order->id)}}" method="post" onsubmit="return confirm('هل أنت متأكد من إلغاء الطلب؟');">
+                                @method('PUT')
+                                @csrf
+                                <div class="info-between">
+                                <button type="submit" class="a-file" style="cursor: pointer"> إلغاءالطلب</button>
                                 </div>
-                                <br>
-                                <p class="number-icon active-icon">1</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>قيد الإنتظار</p>
-                                <div class="iconic active-icon"><i class="fas fa-hourglass-half"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">2</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>في الطريق</p>
-                                <div class="iconic active-icon"><i class="fas fa-angle-double-left"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon active-icon">3</p>
-                            </div>
-
-                            <div class="timeline-item">
-                                <p>تم الوصول</p>
-                                <div class="iconic"><i class="fas fa-check-circle"></i>
-                                </div>
-                                <br>
-                                <p class="number-icon">4</p>
-                            </div>
-                        </div>
-                        <div class="name-ship">صهريج ماء</div>
-                        <div class="info-between">
-                            <a href="#" class="a-file" data-bs-toggle="modal" data-bs-target="#exampleModal2">إلغاء
-                                الطلب</a>
+                            </form>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
             <!-- نهاية طلبات الآليات الثقيلة -->
         </div>
