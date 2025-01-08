@@ -12,7 +12,7 @@ class PostController extends Controller
     {
         // $this->middleware('auth')->except(['index' ,'show']);
         // $this->middleware('auth')->only(['show' ,'index']);
-        $this->middleware('auth:sanctum');
+        // $this->middleware('auth:sanctum');
         // $this->middleware(['isAdmin'])->except(['index','show']);
 
     }
