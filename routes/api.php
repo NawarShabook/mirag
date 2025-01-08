@@ -26,5 +26,6 @@ Route::get('/workshops', [HomeController::class, 'workshops_index']);
 Route::get('/heavy_machines', [HomeController::class, 'heavy_machines_index']);
 
 Route::get('/user_orders',[OrderController::class,'user_orders'])->middleware('auth:sanctum');
+Route::post('/create_order',[OrderController::class,'store'])->middleware('auth:sanctum');
 // Route::apiResource('posts', PostController::class)
 // ->except(['create', 'store','edit', 'update', 'destroy',]);

@@ -35,7 +35,7 @@ class PostController extends Controller
             return response()->json([
                 'message' => 'Not found',
                 'errors' => 'Not found',
-            ], 404); // HTTP 422 Unprocessable Entity
+            ], 404);
         }
 
     }

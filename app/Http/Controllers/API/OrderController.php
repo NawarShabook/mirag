@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\StoreOrderRequest;
+use App\Models\Order;
 class OrderController extends Controller
 {
     public function __construct()
@@ -28,6 +29,23 @@ class OrderController extends Controller
         }
 
         return $user_orders;
+    }
+
+    public function store(StoreOrderRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $data['user_id'] = auth()->user()->id;
+            Order::create($data);
+            return response()->json([
+                'message' => 'Success',
+            ], 201);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Error',
+            ], 422);
+        }
 
     }
 

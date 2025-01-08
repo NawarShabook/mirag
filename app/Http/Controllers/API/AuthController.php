@@ -44,18 +44,18 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'email' => 'required|email|exists:users',
-                'password' => 'required'
+                'email' => ['required', 'string', 'email', 'max:255', 'exists:users'],
+                'password' => ['required', 'string', 'min:8'],
             ]);
 
             $user = User::where('email', $request->email)->first();
 
             if (!$user || !Hash::check($request->password, $user->password)) {
-                return [
-                    'errors' => [
-                        'email' => ['The provided credentials are incorrect.']
-                    ]
-                ];
+
+                return response()->json([
+                    'message' => 'The provided credentials are incorrect.',
+                ], 401);
+
                 // return [
                 //     'message' => 'The provided credentials are incorrect.'
                 // ];
