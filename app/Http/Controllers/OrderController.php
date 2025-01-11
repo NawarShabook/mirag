@@ -127,7 +127,7 @@ class OrderController extends Controller
             $order->save();
             return back()->with('success', 'success');
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            // dd($th->getMessage());
             return back()->with('errors', $th->getMessage());
         }
     }

@@ -48,7 +48,8 @@ class AuthController extends Controller
                 'password' => ['required', 'string', 'min:8'],
             ]);
 
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)
+             ->first(['id','name','email','city','password']);
 
             if (!$user || !Hash::check($request->password, $user->password)) {
 
@@ -75,6 +76,10 @@ class AuthController extends Controller
             ], 422); // HTTP 422 Unprocessable Entity
         }
     }
+    public function user_profile(Request $request)
+    {
+        return $request->user()->only(['id', 'name', 'email','city']);
+    }
 
     public function logout(Request $request)
     {
@@ -84,6 +89,8 @@ class AuthController extends Controller
             'message' => 'You are logged out.'
         ];
     }
+
+
 
     private function validator(array $data)
     {

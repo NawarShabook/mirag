@@ -1,9 +1,5 @@
 <?php
 
-$expirationDate = '2025-01-8'; // Set expiration date
-if (time() > strtotime($expirationDate)) {
-    die('The trial period has expired. Please contact the developer.');
-}
 
 use Illuminate\Http\Request;
 
