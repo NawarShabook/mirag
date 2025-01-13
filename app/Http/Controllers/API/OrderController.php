@@ -45,7 +45,7 @@ class OrderController extends Controller
 
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => "Error.$th->getMessage()",
+                'message' => "Error.".$th->getMessage(),
             ], 422);
         }
 
