@@ -38,6 +38,7 @@ class OrderController extends Controller
         try {
             $data = $request->validated();
             $data['user_id'] = auth()->user()->id;
+            return $data;
             Order::create($data);
             return response()->json([
                 'message' => 'Success',
