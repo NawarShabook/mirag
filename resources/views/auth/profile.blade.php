@@ -28,7 +28,7 @@
                                 <a class="text-white mb-4 h6"><i class="fa fa-earth ml-3 active"></i>المنطقة : {{$user->city}}</a>
                                 <a class="text-white mb-4 h6"><i
                                         class="fa fa-envelope ml-3 active"></i>{{$user->email}}</a>
-                                <a class="text-white mb-4 h6" href="#change-password.html"><i
+                                <a class="text-white mb-4 h6" href="{{route('password.edit')}}"><i
                                         class="fa fa-key ml-3 active"></i>********
                                     <span class="bg-white bg-danger p-1 rounded">تغيير كلمة السر</span></a>
 

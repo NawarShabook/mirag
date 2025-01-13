@@ -8,6 +8,7 @@ use App\Http\Controllers\WorkshopController;
 use App\Http\Controllers\MaintenanceServiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class,'index']);
@@ -36,6 +37,9 @@ Auth::routes([
     'reset' => false,
     'email' => false,
 ]);
+Route::get('/change-password', [ChangePasswordController::class, 'edit'])->name('password.edit')->middleware('auth');
+Route::patch('/change-password', [ChangePasswordController::class, 'update'])->name('password.update')->middleware('auth');
 
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile')->middleware('auth');
+
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile')->middleware('auth');
 

@@ -10,11 +10,11 @@ use App\Http\Controllers\API\OrderController;
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    // Route::get('/user', function (Request $request) {
+    //     return $request->user();
+    // });
 
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/change-password', [AuthController::class, 'change_password']);
     Route::get('/user_profile',[AuthController::class,'user_profile']);
 
     Route::get('/user_orders',[OrderController::class,'user_orders']);

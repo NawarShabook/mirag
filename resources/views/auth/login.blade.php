@@ -35,7 +35,7 @@
                         </div>
                     </div> --}}
                     @if ($errors->has('email') || $errors->has('password'))
-                        
+
                         @if (config('app.debug'))
                         @php
                             $errorMessage = $errors->first('email') ? $errors->first('email') : $errors->first('password');
@@ -54,23 +54,23 @@
                         </div>
                     @endif
 
-                    
+
                     <!--  End Notifications  -->
-                    <form method="POST" action="{{ route('login') }}">
+                                        <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="row justify-content-center">
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    <input type="email" name="email" id="email" class="input-elem" required
+                                    <input type="email" name="email" id="email" class="input-elem" required value="{{old('email')}}"
                                         placeholder="ادخل البريد الإلكتروني" autocomplete="off" />
                                     <label for="email">الإيميل</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    <input type="password" name="password" id="pass-word" class="input-elem" minlength="8" required 
-                                        placeholder="ادخل كلمة المرور" autocomplete="off" />
+                                    <input type="password" name="password" id="pass-word" class="input-elem" minlength="8" required
+                                        placeholder="ادخل كلمة المر ور" autocomplete="off" />
                                     <label for="pass-word">كلمة المرور</label>
                                 </div>
                             </div>

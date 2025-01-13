@@ -81,16 +81,35 @@ class AuthController extends Controller
         return $request->user()->only(['id', 'name', 'email','city']);
     }
 
-    public function logout(Request $request)
+
+    public function change_password(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $request->validate( [
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
 
-        return [
-            'message' => 'You are logged out.'
-        ];
+        try {
+            $user = auth()->user();
+            if (Hash::check($request->password, $user->password)) {
+                return response()->json([
+                    'message' => 'Validation failed',
+                    'errors' => 'لا يمكن أن تكون كلمة المرور الجديدة هي نفسها الحالية',
+                ], 422); // HTTP 422 Unprocessable Entity
+            }
+            $user->password = Hash::make($request['password']);
+            $user->save();
+            return response()->json([
+                'message' => 'Success.',
+            ], 200);
+        } catch (ValidationException $e) {
+            // Return validation errors as JSON
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->errors(),
+            ], 422); // HTTP 422 Unprocessable Entity
+        }
+
     }
-
-
 
     private function validator(array $data)
     {
