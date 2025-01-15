@@ -19,13 +19,14 @@ class HomeController extends Controller
     }
     public function system_settings()
     {
+        $settings_info = config('global_data.settings_info');
         $settings = \App\Models\Setting::all();
-        $settings_array=[];
+
         foreach ($settings as $setting){
-            $settings_array[$setting->key] = $setting->value;
+            $settings_info[$setting->key] = $setting->value;
         }
 
-        return $settings_array;
+        return $settings_info;
     }
     public function maintenance_services_index()
     {

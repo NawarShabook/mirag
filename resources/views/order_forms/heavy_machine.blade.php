@@ -91,9 +91,9 @@
                             @endauth
 
                             <div class="col-12">
-                                <button class="btn btn-primary bg-green w-100 py-3 noborder border-0 "
+                                <a href="https://api.whatsapp.com/send?phone={{$settings_info['whatsapp']}}" class="btn btn-primary bg-green w-100 py-3 noborder border-0 "
                                     type="button"><i class="fab fa-whatsapp"></i> اطلب عبر
-                                    الواتساب</button>
+                                    الواتساب</a>
                             </div>
                         </div>
                     </form>

@@ -38,7 +38,7 @@ class OrderController extends Controller
         try {
             $data = $request->validated();
             $data['user_id'] = auth()->user()->id;
-            return $data;
+            // return $data;
             Order::create($data);
             return response()->json([
                 'message' => 'Success',
@@ -88,7 +88,7 @@ class OrderController extends Controller
         ->map(function ($order) use ($status_map, $order_type) {
             return [
                 'id' => $order->id,
-                'created_at' => $order->created_at,
+                'created_at' => $order->created_at->format('Y-m-d  h:i A'),
                 'status' => $order->status,
                 'status_number' => $status_map[$order->status],
                 $order_type . '_id' => $order->$order_type->id ?? null,

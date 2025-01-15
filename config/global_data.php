@@ -19,4 +19,13 @@ return [
 
     'order_status' => ['waiting','accepted','completed','cancelled'],
 
+    'settings_info' => [
+        'facebook'=>'#',
+        'instagram'=>'#',
+        'linkedin'=>'#',
+        'twitter'=>'#',
+        'whatsapp'=>'#',
+        'location'=>'#',
+        'email'=>'#',
+    ]
 ];

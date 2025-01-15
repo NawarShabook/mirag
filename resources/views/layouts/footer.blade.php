@@ -7,16 +7,16 @@
                     <div class="col-md-6 m mb-5">
                         <h3 class="active mb-4">ابقى على تواصل</h3>
                         <p><i class="fa fa-map-marker-alt ml-2"></i>إدلب ، جسر الشغور</p>
-                        <p><i class="fa fa-phone-alt ml-2"></i>00963945881302</p>
-                        <p><i class="fa fa-envelope ml-2"></i>mirag@mirag.pro</p>
+                        <p><i class="fa fa-phone-alt ml-2"></i>{{$settings_info['whatsapp']}}</p>
+                        <p><i class="fa fa-envelope ml-2"></i>{{$settings_info['email']}}</p>
                         <div class="d-flex justify-content-start mt-4">
-                            <a class="btn btn-outline-light btn-social ml-2 noborder" href="#"><i
+                            <a class="btn btn-outline-light btn-social ml-2 noborder" href="{{$settings_info['twitter']}}"><i
                                     class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social ml-2 noborder" href="#"><i
+                            <a class="btn btn-outline-light btn-social ml-2 noborder" href="{{$settings_info['facebook']}}"><i
                                     class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social ml-2 noborder" href="#"><i
+                            <a class="btn btn-outline-light btn-social ml-2 noborder" href="{{$settings_info['linkedin']}}"><i
                                     class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-outline-light btn-social noborder" href="#"><i
+                            <a class="btn btn-outline-light btn-social noborder" href="{{$settings_info['instagram']}}"><i
                                     class="fab fa-instagram"></i></a>
                         </div>
                     </div>

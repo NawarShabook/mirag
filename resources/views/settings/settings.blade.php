@@ -38,7 +38,7 @@
                 <div class="box whatsapp p-15 p-relative mb-10 between-flex">
                     <i class="fa-brands fa-whatsapp fa-2x c-white h-full center-flex"></i>
                     <input class="b-none bg-none border-ccc p-10 rad-6 d-block w-full c-white" type="number"
-                        id="whatsapp-val" value="{{$settings_array['whatsapp']??''}}" placeholder="00963911111111" />
+                        id="whatsapp-val" value="{{$settings_array['whatsapp']??''}}" placeholder="963911111111" />
                     <button input-val="whatsapp-val" class="label btn-shape bg-green c-white  btn-h mr-10 update-setting-btn">تعديل</button>
                 </div>
                 <div class="box map p-15 p-relative mb-10 between-flex">
@@ -95,3 +95,4 @@
 
     @endsection
 @endsection
+

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\API\HomeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PostController;
@@ -14,7 +13,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //     return $request->user();
     // });
 
-    Route::post('/change-password', [AuthController::class, 'change_password']);
+    Route::patch('/change-password', [AuthController::class, 'change_password']);
     Route::get('/user_profile',[AuthController::class,'user_profile']);
 
     Route::get('/user_orders',[OrderController::class,'user_orders']);

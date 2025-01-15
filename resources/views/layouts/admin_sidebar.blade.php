@@ -3,7 +3,7 @@
     <h3 class="p-relative txt-c mt-0">شركة ميراج</h3>
     <ul>
       <li>
-        <a class="d-flex align-center fs-14 rad-6 p-10" href="#index.html">
+        <a class="d-flex align-center fs-14 rad-6 p-10" href="{{route('admin-overview')}}">
           <i class="fa-regular fa-chart-bar fa-fw"></i>
           <span>ملخص</span>
         </a>

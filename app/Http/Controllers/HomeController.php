@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth')->only('admin_overview');
     }
 
     /**
@@ -32,33 +32,43 @@ class HomeController extends Controller
         $workshops = Workshop::latest()->get();
         $maintenance_services = MaintenanceService::latest()->get();
 
+
+
         $cities = config('global_data.cities');
         $property_types = config('global_data.property_types');
         $sector_codes = config('global_data.sector_codes');
         $block_numbers = config('global_data.block_numbers');
-        return view('index',compact('posts','heavy_machines','workshops','maintenance_services',
+
+        $settings_info = config('global_data.settings_info');
+        $settings = \App\Models\Setting::all();
+
+        foreach ($settings as $setting){
+            $settings_info[$setting->key] = $setting->value;
+        }
+
+        return view('index',
+        compact('posts','heavy_machines','workshops','maintenance_services','settings_info',
          'cities', 'property_types', 'sector_codes', 'block_numbers' ));
     }
 
-    public function profile()
+    public function admin_overview()
     {
-        $user = auth()->user();
-
         $orders_type = config('global_data.orders_type');
 
-        $user_orders = [];
+        $orders = array();
+        $categories = array();
         foreach ($orders_type as $type) {
-            $user_orders[$type] = $this->get_user_orders($type,$user->id);
+            $type_orders = \App\Models\Order::whereNotNull($type.'_id')->count();
+            $orders[$type] = $type_orders;
+
+            $type_array = explode('_', $type);
+
+            $type_model = count($type_array)==1 ? $type_array = ucfirst($type_array[0]) : ucfirst($type_array[0]) . ucfirst($type_array[1]);
+            $modelClass = "\\App\\Models\\$type_model";
+            $categories[$type] = $modelClass::count();
         }
 
-        return view('auth.profile', compact('user','user_orders'));
-    }
+        return view('admin_overview',compact('orders','categories'));
 
-    private function get_user_orders(string $order_type, $user_id)
-    {
-        return \App\Models\Order::whereNotNull($order_type.'_id')
-        ->where('user_id',$user_id)
-        ->where('status','!=','cancelled')
-        ->get(['id','status',$order_type.'_id','created_at']);
     }
 }
