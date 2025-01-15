@@ -22,6 +22,7 @@
                         <div class="code-house c-orange fw-bold" style="letter-spacing: 2px; font-size: 20px;">
                             <span>{{$order->sector_code}}</span><span>{{$order->block_number}}</span>
                             <p>{{$order->building_number}}</p>
+                            <p>{{$order->manual_location}}</p>
                         </div>
                         <h4 class="m-0 bg-orange c-white">{{$order->$order_type->name}}</h4>
                     </div>

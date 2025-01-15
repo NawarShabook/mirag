@@ -336,5 +336,6 @@
             <!-- نهاية طلبات الآليات الثقيلة -->
         </div>
     </div>
+    </div>
     <!-- End All Requests -->
 @endsection

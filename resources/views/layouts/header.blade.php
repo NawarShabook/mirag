@@ -6,13 +6,13 @@
             <img src="/brand/icon.png" class="d-inline" height="75px" alt="logo-sera"> مـيـراج
         </a>
         <div class="link">
-            <a class="p-2 p-lg-3 a-link bg-active" title="الصفحة الرئيسية" aria-current="page" href="/"><i
+            <a class="p-2 p-lg-3 a-link {{ request()->is('/')||request()->routeIs('home') ? 'bg-active' : '' }}" title="الصفحة الرئيسية" aria-current="page" href="/"><i
                     class="fas fa-home"></i></a>
 
             @guest
                 @if (Route::has('login'))
 
-                    <a class="p-2 p-lg-3 a-link" title="تسجيل الدخول" aria-current="page" href="{{ route('login') }}">
+                    <a class="p-2 p-lg-3 a-link {{ request()->routeIs('login') ? 'bg-active' : '' }}"  title="تسجيل الدخول" aria-current="page" href="{{ route('login') }}">
                         <i class="fa fa-sign-in" aria-hidden="true"></i></a>
                 @endif
 
@@ -22,12 +22,12 @@
 
                 @endif --}}
             @else
-            <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="{{ route('profile') }}"><i
+            <a class="p-2 p-lg-3 a-link {{ request()->routeIs('profile') ? 'bg-active' : '' }}"  title="الملف الشخصي" aria-current="page" href="{{ route('profile') }}"><i
                     class="fas fa-user"></i></a>
             @endguest
 
             @isAdmin
-            <a class="p-2 p-lg-3 a-link" title="الملف الشخصي" aria-current="page" href="{{ route('admin-overview') }}">
+            <a class="p-2 p-lg-3 a-link"  title="لوحة التحكم" aria-current="page" href="{{ route('admin-overview') }}">
                 <i class="fa fa-cog" aria-hidden="true"></i></i></a>
             @endisAdmin
 
