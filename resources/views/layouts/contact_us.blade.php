@@ -15,14 +15,14 @@
                     <i class="fa-brands fa-whatsapp p-3 fa-2x  bg-active text-white"></i>
                     <div style="padding-right: 1.5rem !important;">
                         <h6 class="text-white mb-1">رقم الواتساب :</h6>
-                        <h4 class="text-white m-0" style="text-align: right;">00963945881302</h4>
+                        <h4 class="text-white m-0" style="text-align: right;">{{$settings_info['whatsapp']}}</h4>
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-4">
                     <i class="fa-regular fa-envelope p-3 fa-2x  bg-active text-white"></i>
                     <div style="padding-right: 1.5rem !important;">
                         <h6 class="text-white mb-1">البريد الإلكتروني :</h6>
-                        <h4 class="text-white m-0" style="text-align: right;">mirag@mirag.pro</h4>
+                        <h4 class="text-white m-0" style="text-align: right;">{{$settings_info['email']}}</h4>
                     </div>
                 </div>
             </div>

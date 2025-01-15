@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -21,6 +22,16 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::if('isAdmin', function () {
             return auth()->check() && auth()->user()->role;
+        });
+
+        // Share data only with views using 'layouts.footer'
+        View::composer('layouts.footer', function ($view) {
+            $settings_info = config('global_data.settings_info');
+            $settings = \App\Models\Setting::all();
+            foreach ($settings as $setting){
+                $settings_info[$setting->key] = $setting->value;
+            }
+            $view->with('settings_info', $settings_info);
         });
     }
 }
