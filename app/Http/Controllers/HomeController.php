@@ -58,7 +58,8 @@ class HomeController extends Controller
         $orders = array();
         $categories = array();
         foreach ($orders_type as $type) {
-            $type_orders = \App\Models\Order::whereNotNull($type.'_id')->count();
+            $type_orders = \App\Models\Order::whereNotNull($type.'_id')
+            ->where('status', '!=', 'cancelled')->count();
             $orders[$type] = $type_orders;
 
             $type_array = explode('_', $type);

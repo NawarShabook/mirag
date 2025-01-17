@@ -55,7 +55,7 @@ class PostController extends Controller
             'image' => isset($imagePath) ? 'storage/' . $imagePath : null, // Use public storage path
         ]);
 
-        return redirect()->back()->with('success', 'success');
+        return redirect()->back()->with('success','تمت العملية بنجاح');
 }
 
 
@@ -99,7 +99,7 @@ class PostController extends Controller
                 'content' => $request->content,
             ]);
 
-            return redirect()->route('posts.create');
+            return redirect()->route('posts.create')->with('success','تمت العملية بنجاح');
         } catch (\Throwable $th) {
             return redirect()->route('posts.create')->with('errors',$th->getMessage());
         }

@@ -46,7 +46,7 @@ class WorkshopController extends Controller
                 'workers_count' => $request->workers_count,
                 'image' => 'storage/' . $imagePath,
             ]);
-            return back()->with('success','success');
+            return back()->with('success','تمت العملية بنجاح');
 
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());
@@ -96,7 +96,7 @@ class WorkshopController extends Controller
             $workshop->workers_count = $request->workers_count;
             $workshop->save();
 
-            return redirect()->route('workshops.create');
+            return redirect()->route('workshops.create')->with('success','تمت العملية بنجاح');
         } catch (\Throwable $th) {
             return redirect()->route('workshops.create')->with('errors',$th->getMessage());
         }

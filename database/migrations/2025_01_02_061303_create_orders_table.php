@@ -18,15 +18,15 @@ return new class extends Migration
             $table->string('property_type');
             $table->string('sector_code')->nullable();
             $table->string('block_number')->nullable();
-            $table->smallInteger('building_number')->nullable();
+            $table->string('building_number')->nullable();
             $table->string('manual_location')->nullable();
             $table->string('status')->default('waiting');
             $table->text('problem_information')->nullable();
 
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
-            $table->foreignId('workshop_id')->nullable()->constrained()->onDelete('set null');
-            $table->foreignId('maintenance_service_id')->nullable()->constrained()->onDelete('set null');
-            $table->foreignId('heavy_machine_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('workshop_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('maintenance_service_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('heavy_machine_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

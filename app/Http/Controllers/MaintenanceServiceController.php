@@ -43,7 +43,7 @@ class MaintenanceServiceController extends Controller
                 'name' => $request->name,
                 'image' => 'storage/' . $imagePath,
             ]);
-            return back()->with('success','');
+            return back()->with('success','تمت العملية بنجاح');
 
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());
@@ -90,7 +90,7 @@ class MaintenanceServiceController extends Controller
             $maintenanceService->name = $request->name;
             $maintenanceService->save();
 
-            return redirect()->route('maintenance_services.create');
+            return redirect()->route('maintenance_services.create')->with('success','تمت العملية بنجاح');
         } catch (\Throwable $th) {
             return redirect()->route('maintenance_services.create')->with('errors',$th->getMessage());
         }

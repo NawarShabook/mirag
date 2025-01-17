@@ -34,7 +34,7 @@ class HeavyMachineController extends Controller
             'name' => 'required|string|max:50',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         try {
             $image = $request->file('image');
             $newImageName = time() . '_' . $image->getClientOriginalName();
@@ -44,8 +44,8 @@ class HeavyMachineController extends Controller
                 'name' => $request->name,
                 'image' => 'storage/' . $imagePath,
             ]);
-            return back()->with('success','');
-            
+            return back()->with('success','تمت العملية بنجاح');
+
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());
         }
@@ -92,7 +92,7 @@ class HeavyMachineController extends Controller
             $heavyMachine->name = $request->name;
             $heavyMachine->save();
 
-            return redirect()->route('heavy_machines.create');
+            return redirect()->route('heavy_machines.create')->with('success','تمت العملية بنجاح');
         } catch (\Throwable $th) {
             return redirect()->route('heavy_machines.create')->with('errors',$th->getMessage());
         }
@@ -107,14 +107,14 @@ class HeavyMachineController extends Controller
             if ($heavyMachine->image && File::exists(public_path($heavyMachine->image))) {
                 File::delete(public_path($heavyMachine->image));
             }
-    
+
             // Delete the heavyMachine
             $heavyMachine->delete();
-    
+
             return redirect()->back()->with('success', 'heavyMachine deleted successfully.');
         } catch (\Throwable $th) {
             return back()->with('errors',$th->getMessage());
         }
-        
+
     }
 }

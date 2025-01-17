@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
+use Illuminate\Validation\ValidationException;
 class OrderController extends Controller
 {
     public function __construct()
@@ -44,9 +45,9 @@ class OrderController extends Controller
                 'message' => 'Success',
             ], 201);
 
-        } catch (\Throwable $th) {
+        } catch (ValidationException $e) {
             return response()->json([
-                'message' => "Error.".$th->getMessage(),
+                'message' => "Error.".$e->errors(),
             ], 422);
         }
 

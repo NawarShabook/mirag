@@ -23,20 +23,27 @@
                     <div class="col-md-6 mb-5">
                         <h3 class="active mb-4">روابط سريعة</h3>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white mb-2" href="#"><i
+                            <a class="text-white mb-2" href="/#"><i
                                     class="fa fa-angle-left ml-2 active"></i>الرئيسية</a>
-                            <a class="text-white mb-2" href="#"><i
-                                    class="fa fa-angle-left ml-2 active"></i>الأقسام</a>
-                            <a class="text-white mb-2" href="#"><i
+
+                            <a class="text-white mb-2" href="/#maintenance_service"><i
+                                    class="fa fa-angle-left ml-2 active"></i>خدمات الصيانة</a>
+
+                            <a class="text-white mb-2" href="/#workshop"><i
                                     class="fa fa-angle-left ml-2 active"></i>الورشات</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-left ml-2 active"></i>الآليات
+
+                            <a class="text-white mb-2" href="/#heavy_machine"><i class="fa fa-angle-left ml-2 active"></i>الآليات
                                 الثقيلة</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-left ml-2 active"></i>آخر
+
+                            <a class="text-white mb-2" href="/#last-works"><i class="fa fa-angle-left ml-2 active"></i>آخر
                                 الأخبار</a>
+
                             <a class="text-white mb-2" href="#"><i
                                     class="fa fa-angle-left ml-2 active"></i>الخصوصية</a>
+
                             <a class="text-white mb-2" href="#"><i class="fa fa-angle-left ml-2 active"></i>الأسئلة
                                 الشائعة</a>
+
                             <a class="text-white mb-2" href="#"><i
                                     class="fa fa-angle-left ml-2 active"></i>مساعدة</a>
                         </div>

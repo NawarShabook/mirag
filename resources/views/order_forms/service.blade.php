@@ -92,7 +92,7 @@ aria-hidden="true">
                             </select>
                         </div>
                         <div class="col-12">
-                            <input type="number" maxlength="6" id="inputCode"
+                            <input type="text" id="inputCode"
                                 oninput="displayCode()" class="form-control border-0 noborder"
                                 placeholder="ادخل رقم البناء ..." style="height:55px;" name="building_number" required>
                         </div>

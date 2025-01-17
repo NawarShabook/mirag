@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-  
-    
+
+
     <div class="content w-full">
       <h1 class="p-relative">آخر الأخبار</h1>
       <div class="settings-page m-20 d-grid gap-20">
@@ -23,6 +23,9 @@
 
             <p class="p-10 rad-10 m-20 bg-red c-white">حدث خطأ ما !</p>
           @endif
+          @session('success')
+          <p class="p-10 rad-10 m-20 bg-green c-white">{{session('success')}}</p>
+          @endsession
 
           <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
             @method('POST')

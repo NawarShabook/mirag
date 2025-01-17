@@ -13,7 +13,7 @@
 @endif
 @endif
     <!-- Start Tags -->
-    <div class="container mb-5">
+    <div class="container mb-5" id="maintenance_service">
         <div class="row">
             <h6 class="text-white fw-bold"><i class="fas fa-hashtag"></i> استمتع بخدماتنا المتميزة
             </h6>
@@ -39,7 +39,7 @@
     </div>
     <!-- End Tags -->
     <!-- Start Categories -->
-    <section class="mb-5" id="categories">
+    <section class="mb-5" id="workshop">
         <div class="container">
             <div class="row">
                 <h6 class="text-white fw-bold"><i class="fas fa-check-double"></i> نحن هنا لمساعدتك
@@ -74,7 +74,7 @@
 
     <!-- Start Bulldozer -->
 
-    <section class="mb-5" id="categories">
+    <section class="mb-5" id="heavy_machine">
         <div class="container">
             <div class="row">
                 <h6 class="text-white fw-bold"><i class="fas fa-snowplow"></i> من الثقيل إلى الأثقل <span
