@@ -7,7 +7,7 @@ use App\Http\Requests\StoreOrderRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-
+use OneSignal;
 class OrderController extends Controller
 {
     public function __construct()
@@ -57,7 +57,18 @@ class OrderController extends Controller
         try {
             $data = $request->validated();
             $data['user_id'] = auth()->user()->id;
-            Order::create($data);
+            $order = Order::create($data);
+
+            if ($order->user && $order->user->onesignal_playerid) {
+                OneSignal::sendNotificationToUser(
+                    $this->order_status_notification_message('waiting'),
+                    $order->user->onesignal_playerid,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
             return back()->with('success','success');
         } catch (\Throwable $th) {
             return back()->with('errors', $th->getMessage());
@@ -107,6 +118,17 @@ class OrderController extends Controller
         try {
             $order->status = $request->status;
             $order->save();
+
+            if ($order->user && $order->user->onesignal_playerid) {
+                OneSignal::sendNotificationToUser(
+                    $this->order_status_notification_message($order->status),
+                    $order->user->onesignal_playerid,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
             return back()->with('success', 'success');
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -120,11 +142,22 @@ class OrderController extends Controller
         $order = Order::findOrFail($order_id);
         if($order->user_id!==auth()->user()->id)
         {
+
             return back()->with('errors', ('errors'));
         }
         try {
             $order->status = 'cancelled';
             $order->save();
+            if ($order->user && $order->user->onesignal_playerid) {
+                OneSignal::sendNotificationToUser(
+                    $this->order_status_notification_message($order->status),
+                    $order->user->onesignal_playerid,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
             return back()->with('success', 'success');
         } catch (\Throwable $th) {
             // dd($th->getMessage());
@@ -147,4 +180,17 @@ class OrderController extends Controller
         ->where('status', $status)
         ->count();
     }
+
+    private function order_status_notification_message($order_status)
+    {
+        $status_dict = [
+            'waiting' => 'تم إرسال طلبك بنجاح',
+            'accepted' => 'تم قبول طلبك، الطلب الآن في الطريق',
+            'completed' => 'تم إكمال الطلب، شكرا لاستخدام خدمتنا',
+            'cancelled' => 'لقد تم إلغاء طلبك',
+        ];
+
+        return $status_dict[$order_status];
+    }
 }
+

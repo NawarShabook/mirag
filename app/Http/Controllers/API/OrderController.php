@@ -40,7 +40,19 @@ class OrderController extends Controller
             $data = $request->validated();
             $data['user_id'] = auth()->user()->id;
             // return $data;
-            Order::create($data);
+            $order = Order::create($data);
+
+            if ($order->user && $order->user->onesignal_playerid) {
+                OneSignal::sendNotificationToUser(
+                    $this->order_status_notification_message('waiting'),
+                    $order->user->onesignal_playerid,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
+
             return response()->json([
                 'message' => 'Success',
             ], 201);
@@ -65,6 +77,16 @@ class OrderController extends Controller
         try {
             $order->status = 'cancelled';
             $order->save();
+            if ($order->user && $order->user->onesignal_playerid) {
+                OneSignal::sendNotificationToUser(
+                    $this->order_status_notification_message($order->status),
+                    $order->user->onesignal_playerid,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
             return response()->json([
                 'message' => 'Success.',
             ], 200);
@@ -97,5 +119,17 @@ class OrderController extends Controller
             ];
         });
 
+    }
+
+    private function order_status_notification_message($order_status)
+    {
+        $status_dict = [
+            'waiting' => 'تم إرسال طلبك بنجاح',
+            'accepted' => 'تم قبول طلبك، الطلب الآن في الطريق',
+            'completed' => 'تم إكمال الطلب، شكرا لاستخدام خدمتنا',
+            'cancelled' => 'لقد تم إلغاء طلبك',
+        ];
+
+        return $status_dict[$order_status];
     }
 }

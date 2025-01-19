@@ -30,17 +30,6 @@ class AuthController extends Controller
 
             $token = $user->createToken($request->name);
 
-            if($user->onesignal_playerid){
-                OneSignal::sendNotificationToUser(
-                    "Welcome Message",
-                    $user->onesignal_playerid,
-                    $url = null,
-                    $data = null,
-                    $buttons = null,
-                    $schedule = null
-                );
-            }
-
             return [
                 'user' => $user,
                 'token' => $token->plainTextToken
@@ -79,14 +68,6 @@ class AuthController extends Controller
             if($request->onesignal_id){
                 $user->onesignal_playerid = $request->onesignal_id;
                 $user->save();
-                OneSignal::sendNotificationToUser(
-                    "Welcome Message",
-                    $user->onesignal_playerid,
-                    $url = null,
-                    $data = null,
-                    $buttons = null,
-                    $schedule = null
-                );
             }
 
             $token = $user->createToken($user->name);
