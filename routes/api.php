@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\OrderController;
-
+use App\Http\Controllers\API\MailController;
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
@@ -39,6 +39,8 @@ Route::get('/maintenance_services', [HomeController::class, 'maintenance_service
 Route::get('/workshops', [HomeController::class, 'workshops_index']);
 Route::get('/heavy_machines', [HomeController::class, 'heavy_machines_index']);
 
+// mail
+Route::post('/send-email', [MailController::class,'sendEmail']);
 
 
 // Route::apiResource('posts', PostController::class)

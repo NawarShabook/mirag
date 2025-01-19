@@ -150,7 +150,7 @@
     @include('layouts.contact_us')
     @section('script')
         @if (session('errors') || session('success'))
-            @include('order_forms.response')
+            {{-- @include('order_forms.response') --}}
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     order_link_id = localStorage.getItem("order_request_link_id");

@@ -11,9 +11,10 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\UserProfileController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MailController;
 
 Route::get('/', [HomeController::class,'index']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+Route::get('/home', [HomeController::class, 'index'])
 ->name('home');
 
 Route::resource('posts', PostController::class);
@@ -22,6 +23,8 @@ Auth::routes([
     'reset' => false,
     'email' => false,
 ]);
+
+Route::post('/send-email', [MailController::class,'sendEmail'])->name('sendEmail');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('orders', OrderController::class)

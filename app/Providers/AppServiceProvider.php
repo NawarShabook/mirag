@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Share data only with views using 'layouts.footer'
-        View::composer('layouts.footer', function ($view) {
+        View::composer(['layouts.footer', 'index'], function ($view) {
             $settings_info = config('global_data.settings_info');
             $settings = \App\Models\Setting::all();
             foreach ($settings as $setting){
