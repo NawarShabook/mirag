@@ -76,8 +76,9 @@ class AuthController extends Controller
                 // ];
             }
 
-            if($request->one_signal_id){
-                $user->onesignal_playerid = $request->one_signal_id;
+            if($request->onesignal_id){
+                $user->onesignal_playerid = $request->onesignal_id;
+                $user->save();
                 OneSignal::sendNotificationToUser(
                     "Welcome Message",
                     $user->onesignal_playerid,
@@ -144,6 +145,7 @@ class AuthController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'city' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'one_signal_id' => ['nullable', 'string','max:255'],
         ]);
     }
 }
