@@ -70,8 +70,7 @@ class OrderController extends Controller
 
     public function cancel_order($order_id)
     {
-        $order = Order::where('id',$order_id);
-        return $order;
+        $order = Order::where('id',$order_id)->first();
         if(!$order || $order->user_id!==auth()->user()->id)
         {
             return response()->json([
