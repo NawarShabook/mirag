@@ -19,6 +19,7 @@ class OrderController extends Controller
 
     }
 
+
     /**
      * Display a listing of the resource.
      */
@@ -41,13 +42,6 @@ class OrderController extends Controller
         return view('orders.index', compact('order_status_counts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -60,8 +54,9 @@ class OrderController extends Controller
             $order = Order::create($data);
 
             if ($order->user && $order->user->onesignal_playerid) {
+                $message = $this->get_order_type_name($order);
                 OneSignal::sendNotificationToUser(
-                    $this->order_status_notification_message('waiting'),
+                    $this->order_status_notification_message('waiting',$message),
                     $order->user->onesignal_playerid,
                     $url = null,
                     $data = null,
@@ -97,13 +92,6 @@ class OrderController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -120,8 +108,10 @@ class OrderController extends Controller
             $order->save();
 
             if ($order->user && $order->user->onesignal_playerid) {
+                $message = $this->get_order_type_name($order);
+                $message .= $order->status=='cancelled' ? '،حاول مجدداً' : '';
                 OneSignal::sendNotificationToUser(
-                    $this->order_status_notification_message($order->status),
+                    $this->order_status_notification_message($order->status, $message, $order->user->name),
                     $order->user->onesignal_playerid,
                     $url = null,
                     $data = null,
@@ -139,18 +129,18 @@ class OrderController extends Controller
 
     public function cancel_order($order_id)
     {
-        $order = Order::findOrFail($order_id);
-        if($order->user_id!==auth()->user()->id)
+        $order = Order::where('id',$order_id);
+        if(!$order || $order->user_id!==auth()->user()->id)
         {
-
             return back()->with('errors', ('errors'));
         }
         try {
             $order->status = 'cancelled';
             $order->save();
             if ($order->user && $order->user->onesignal_playerid) {
+                $message = $this->get_order_type_name($order).'بنجاح';
                 OneSignal::sendNotificationToUser(
-                    $this->order_status_notification_message($order->status),
+                    $this->order_status_notification_message($order->status, $message),
                     $order->user->onesignal_playerid,
                     $url = null,
                     $data = null,
@@ -165,13 +155,6 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
-    }
 
     private function get_order_status_count(string $order_type, string $status)
     {
@@ -181,13 +164,30 @@ class OrderController extends Controller
         ->count();
     }
 
-    private function order_status_notification_message($order_status)
+    private function get_order_type_name(Order $order)
     {
+        if($order->workshop_id)
+        {
+            return 'ورشة'.$order->workshop->name;
+        }
+        elseif($order->maintenance_service_id)
+        {
+            return 'خدمة'.$order->maintenance_service->name;
+        }
+        elseif($order->heavy_machine_id)
+        {
+            return 'آلية'.$order->heavy_machine->name;
+        }
+        return '';
+    }
+    private function order_status_notification_message($order_status, $message='', $user_name='', )
+    {
+
         $status_dict = [
-            'waiting' => 'تم إرسال طلبك بنجاح',
-            'accepted' => 'تم قبول طلبك، الطلب الآن في الطريق',
-            'completed' => 'تم إكمال الطلب، شكرا لاستخدام خدمتنا',
-            'cancelled' => 'لقد تم إلغاء طلبك',
+            "waiting" => "تم إرسال طلبك $message بنجاح",
+            "accepted" => "تم قبول طلبك، $message الآن في الطريق",
+            "completed" => "تم إكمال الطلب، شكرا لاستخدامك خدمتنا ($user_name)",
+            "cancelled" => "لقد تم إلغاء طلبك $message",
         ];
 
         return $status_dict[$order_status];

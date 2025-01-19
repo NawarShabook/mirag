@@ -45,8 +45,9 @@ class OrderController extends Controller
             $order = Order::create($data);
 
             if ($order->user && $order->user->onesignal_playerid) {
+                $message = $this->get_order_type_name($order);
                 OneSignal::sendNotificationToUser(
-                    $this->order_status_notification_message('waiting'),
+                    $this->order_status_notification_message('waiting', $message),
                     $order->user->onesignal_playerid,
                     $url = null,
                     $data = null,
@@ -69,7 +70,11 @@ class OrderController extends Controller
 
     public function cancel_order($order_id)
     {
-        $order = Order::findOrFail($order_id);
+        $order = Order::where('id',$order_id);
+        if(!$order || $order->user_id!==auth()->user()->id)
+        {
+            return back()->with('errors', ('errors'));
+        }
         if($order->user_id!==auth()->user()->id)
         {
             return response()->json([
@@ -80,8 +85,9 @@ class OrderController extends Controller
             $order->status = 'cancelled';
             $order->save();
             if ($order->user && $order->user->onesignal_playerid) {
+                $message = $this->get_order_type_name($order).'بنجاح';
                 OneSignal::sendNotificationToUser(
-                    $this->order_status_notification_message($order->status),
+                    $this->order_status_notification_message($order->status, $message),
                     $order->user->onesignal_playerid,
                     $url = null,
                     $data = null,
@@ -107,7 +113,7 @@ class OrderController extends Controller
         ->where('user_id', $user_id)
         ->where('status', '!=', 'cancelled')
         ->with("$order_type:id,name")
-        ->orderBy('created_at')
+        ->orderBy('updated_at','desc')
         ->orderBy('status')
         ->get(['id', 'status', $order_type . '_id', 'created_at'])
         ->map(function ($order) use ($status_map, $order_type) {
@@ -123,13 +129,30 @@ class OrderController extends Controller
 
     }
 
-    private function order_status_notification_message($order_status)
+    private function get_order_type_name(Order $order)
     {
+        if($order->workshop_id)
+        {
+            return 'ورشة'.$order->workshop->name;
+        }
+        elseif($order->maintenance_service_id)
+        {
+            return 'خدمة'.$order->maintenance_service->name;
+        }
+        elseif($order->heavy_machine_id)
+        {
+            return 'آلية'.$order->heavy_machine->name;
+        }
+        return '';
+    }
+    private function order_status_notification_message($order_status, $message='', $user_name='', )
+    {
+
         $status_dict = [
-            'waiting' => 'تم إرسال طلبك بنجاح',
-            'accepted' => 'تم قبول طلبك، الطلب الآن في الطريق',
-            'completed' => 'تم إكمال الطلب، شكرا لاستخدام خدمتنا',
-            'cancelled' => 'لقد تم إلغاء طلبك',
+            "waiting" => "تم إرسال طلبك $message بنجاح",
+            "accepted" => "تم قبول طلبك، $message الآن في الطريق",
+            "completed" => "تم إكمال الطلب، شكرا لاستخدامك خدمتنا ($user_name)",
+            "cancelled" => "لقد تم إلغاء طلبك $message",
         ];
 
         return $status_dict[$order_status];
