@@ -149,6 +149,7 @@
                                 </div>
                             </div>
                             <div class="name-ship">{{$order->maintenance_service->name}}</div>
+                            @if ($order->status!='completed')
                             <form action="{{route('cancel_order', $order->id)}}" method="post" onsubmit="return confirm('هل أنت متأكد من إلغاء الطلب؟');">
                                 @method('PUT')
                                 @csrf
@@ -156,6 +157,7 @@
                                 <button type="submit" class="a-file" style="cursor: pointer"> إلغاءالطلب</button>
                                 </div>
                             </form>
+                            @endif
 
                         </div>
                     </div>
@@ -324,6 +326,7 @@
                                 </div>
                             </div>
                             <div class="name-ship">{{$order->heavy_machine->name}}</div>
+                            @if ($order->status!='completed')
                             <form action="{{route('cancel_order', $order->id)}}" method="post" onsubmit="return confirm('هل أنت متأكد من إلغاء الطلب؟');">
                                 @method('PUT')
                                 @csrf
@@ -331,6 +334,7 @@
                                 <button type="submit" class="a-file" style="cursor: pointer"> إلغاءالطلب</button>
                                 </div>
                             </form>
+                            @endif
                         </div>
                     </div>
                 @endforeach
