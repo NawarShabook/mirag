@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+
+use OneSignal;
 class AuthController extends Controller
 {
 
@@ -23,9 +25,21 @@ class AuthController extends Controller
                 'email' => $data['email'],
                 'city' => $data['city'],
                 'password' => Hash::make($data['password']),
+                'onesignal_playerid' => $data['one_signal_id'] ?? null,
             ]);
 
             $token = $user->createToken($request->name);
+
+            if($user->onesignal_playerid){
+                OneSignal::sendNotificationToUser(
+                    "Welcome Message",
+                    $user->onesignal_playerid,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
 
             return [
                 'user' => $user,
@@ -60,6 +74,18 @@ class AuthController extends Controller
                 // return [
                 //     'message' => 'The provided credentials are incorrect.'
                 // ];
+            }
+
+            if($request->one_signal_id){
+                $user->onesignal_playerid = $request->one_signal_id;
+                OneSignal::sendNotificationToUser(
+                    "Welcome Message",
+                    $user->onesignal_playerid,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
             }
 
             $token = $user->createToken($user->name);

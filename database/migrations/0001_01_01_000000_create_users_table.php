@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('city');
             $table->tinyInteger('role')->default(0); // 0 = user, 1 = admin, 2 = moderator...
+            $table->string('onesignal_playerid')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
