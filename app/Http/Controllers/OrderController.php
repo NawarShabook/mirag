@@ -130,9 +130,9 @@ class OrderController extends Controller
     public function cancel_order($order_id)
     {
         $order = Order::where('id',$order_id);
-        if(!$order || $order->user_id!==auth()->user()->id)
+        if(!$order || $order->user_id!==auth()->user()->id || $order->status=='completed')
         {
-            return back()->with('errors', ('errors'));
+            return back()->with('errors', 'errors');
         }
         try {
             $order->status = 'cancelled';
@@ -168,15 +168,15 @@ class OrderController extends Controller
     {
         if($order->workshop_id)
         {
-            return 'ورشة'.$order->workshop->name;
+            return ' ورشة)'.$order->workshop->name.'(';
         }
         elseif($order->maintenance_service_id)
         {
-            return 'خدمة'.$order->maintenance_service->name;
+            return ' خدمة)'.$order->maintenance_service->name.'(';
         }
         elseif($order->heavy_machine_id)
         {
-            return 'آلية'.$order->heavy_machine->name;
+            return ' آلية)'.$order->heavy_machine->name.'(';
         }
         return '';
     }

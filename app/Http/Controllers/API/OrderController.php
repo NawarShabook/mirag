@@ -81,6 +81,12 @@ class OrderController extends Controller
                 'message' => 'Unauthenticated.',
             ], 401);
         }
+        if($order->status=='completed')
+        {
+            return response()->json([
+                'message' => 'Cannot cancel completed orders.',
+            ], 400);
+        }
         try {
             $order->status = 'cancelled';
             $order->save();
@@ -133,15 +139,15 @@ class OrderController extends Controller
     {
         if($order->workshop_id)
         {
-            return 'ورشة'.$order->workshop->name;
+            return ' ورشة)'.$order->workshop->name.'(';
         }
         elseif($order->maintenance_service_id)
         {
-            return 'خدمة'.$order->maintenance_service->name;
+            return ' خدمة)'.$order->maintenance_service->name.'(';
         }
         elseif($order->heavy_machine_id)
         {
-            return 'آلية'.$order->heavy_machine->name;
+            return ' آلية)'.$order->heavy_machine->name.'(';
         }
         return '';
     }
