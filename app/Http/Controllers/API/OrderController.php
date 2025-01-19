@@ -71,9 +71,12 @@ class OrderController extends Controller
     public function cancel_order($order_id)
     {
         $order = Order::where('id',$order_id);
+        return $order;
         if(!$order || $order->user_id!==auth()->user()->id)
         {
-            return back()->with('errors', ('errors'));
+            return response()->json([
+                'message' => 'Not Allowed.',
+            ], 401);
         }
         if($order->user_id!==auth()->user()->id)
         {
