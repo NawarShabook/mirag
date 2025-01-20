@@ -146,9 +146,9 @@ class OrderController extends Controller
         elseif($order->maintenance_service_id)
         {
             if($order->status == 'accepted'){
-                return '، مهني ('.$order->maintenance_service->name.')';
+                return ' مهني ('.$order->maintenance_service->name.')';
             }
-            return '، خدمة ('.$order->maintenance_service->name.')';
+            return ' خدمة ('.$order->maintenance_service->name.')';
         }
         elseif($order->heavy_machine_id)
         {
@@ -160,8 +160,8 @@ class OrderController extends Controller
     {
 
         $status_dict = [
-            "waiting" => "تم إرسال طلبك $message بنجاح .",
-            "accepted" => "تم قبول طلبك، $message في الطريق إليك .",
+            "waiting" => "تم إرسال طلبك ، $message بنجاح .",
+            "accepted" => "تم قبول طلبك ، $message في الطريق إليك .",
             "completed" => "تم إكمال الطلب بنجاح ، شكرا لاستخدامك خدماتنا ($user_name)",
             "cancelled" => "تم إلغاء طلبك $message",
         ];
