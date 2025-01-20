@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-
+use OneSignal;
 
 class AuthController extends Controller
 {
@@ -29,6 +29,16 @@ class AuthController extends Controller
             ]);
 
             $token = $user->createToken($request->name);
+            if ($user->onesignal_playerid) {
+                OneSignal::sendNotificationToUser(
+                    "أهلا بك ($user->name) في ميراج",
+                    $user->onesignal_playerid,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
 
             return [
                 'user' => $user,
@@ -72,6 +82,16 @@ class AuthController extends Controller
 
             $token = $user->createToken($user->name);
 
+            if ($user->onesignal_playerid) {
+                OneSignal::sendNotificationToUser(
+                    "أهلا بك ($user->name) في ميراج",
+                    $user->onesignal_playerid,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
             return [
                 'user' => $user,
                 'token' => $token->plainTextToken

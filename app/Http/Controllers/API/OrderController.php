@@ -141,15 +141,18 @@ class OrderController extends Controller
     {
         if($order->workshop_id)
         {
-            return '(ورشة '.$order->workshop->name.')';
+            return '('.$order->workshop->name.')';
         }
         elseif($order->maintenance_service_id)
         {
-            return '(خدمة '.$order->maintenance_service->name.')';
+            if($order->status == 'accepted'){
+                return '، مهني ( '.$order->maintenance_service->name.')';
+            }
+            return '، خدمة ( '.$order->maintenance_service->name.')';
         }
         elseif($order->heavy_machine_id)
         {
-            return '(آلية '.$order->heavy_machine->name.')';
+            return '('.$order->heavy_machine->name.')';
         }
         return '';
     }
@@ -157,10 +160,10 @@ class OrderController extends Controller
     {
 
         $status_dict = [
-            "waiting" => "تم إرسال طلبك $message بنجاح",
-            "accepted" => "تم قبول طلبك، $message الآن في الطريق",
-            "completed" => "تم إكمال الطلب، شكرا لاستخدامك خدمتنا ($user_name)",
-            "cancelled" => "لقد تم إلغاء طلبك $message",
+            "waiting" => "تم إرسال طلبك $message بنجاح .",
+            "accepted" => "تم قبول طلبك، $message في الطريق إليك .",
+            "completed" => "تم إكمال الطلب بنجاح ، شكرا لاستخدامك خدماتنا ($user_name)",
+            "cancelled" => "تم إلغاء طلبك $message",
         ];
 
         return $status_dict[$order_status];
