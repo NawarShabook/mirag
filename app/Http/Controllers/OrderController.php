@@ -109,7 +109,7 @@ class OrderController extends Controller
 
             if ($order->user && $order->user->onesignal_playerid) {
                 $message = $this->get_order_type_name($order);
-                $message .= $order->status=='cancelled' ? '،حاول مجدداً' : '';
+                $message .= $order->status=='cancelled' ? ' ، حاول مجدداً' : '';
                 OneSignal::sendNotificationToUser(
                     $this->order_status_notification_message($order->status, $message, $order->user->name),
                     $order->user->onesignal_playerid,
@@ -138,7 +138,7 @@ class OrderController extends Controller
             $order->status = 'cancelled';
             $order->save();
             if ($order->user && $order->user->onesignal_playerid) {
-                $message = $this->get_order_type_name($order).'بنجاح';
+                $message = $this->get_order_type_name($order).' بنجاح';
                 OneSignal::sendNotificationToUser(
                     $this->order_status_notification_message($order->status, $message),
                     $order->user->onesignal_playerid,
