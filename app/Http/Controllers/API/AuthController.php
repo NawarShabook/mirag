@@ -78,11 +78,7 @@ class AuthController extends Controller
             if($request->onesignal_id){
                 $user->onesignal_playerid = $request->onesignal_id;
                 $user->save();
-            }
 
-            $token = $user->createToken($user->name);
-
-            if ($user->onesignal_playerid) {
                 OneSignal::sendNotificationToUser(
                     "أهلا بك ($user->name) في ميراج",
                     $user->onesignal_playerid,
@@ -92,6 +88,10 @@ class AuthController extends Controller
                     $schedule = null
                 );
             }
+
+            $token = $user->createToken($user->name);
+
+
             return [
                 'user' => $user,
                 'token' => $token->plainTextToken
