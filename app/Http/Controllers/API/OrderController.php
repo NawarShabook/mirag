@@ -146,9 +146,9 @@ class OrderController extends Controller
         elseif($order->maintenance_service_id)
         {
             if($order->status == 'accepted'){
-                return '، مهني ( '.$order->maintenance_service->name.')';
+                return '، مهني ('.$order->maintenance_service->name.')';
             }
-            return '، خدمة ( '.$order->maintenance_service->name.')';
+            return '، خدمة ('.$order->maintenance_service->name.')';
         }
         elseif($order->heavy_machine_id)
         {
