@@ -44,8 +44,8 @@ class OrderController extends Controller
             // return $data;
             $order = Order::create($data);
 
+            $message = $this->get_order_type_name($order);
             if ($order->user && $order->user->onesignal_playerid) {
-                $message = $this->get_order_type_name($order);
                 OneSignal::sendNotificationToUser(
                     $this->order_status_notification_message('waiting', $message),
                     $order->user->onesignal_playerid,
