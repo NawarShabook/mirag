@@ -56,6 +56,19 @@ class OrderController extends Controller
                 );
             }
 
+            $playerid_admin_user = \App\Models\User::where('role',1)->first('onesignal_playerid');
+            if($playerid_admin_user){
+                $user_name = $order->user->name;
+                OneSignal::sendNotificationToUser(
+                    "تم إرسال طلب $message من قبل المستخدم ($user_name)",
+                    $playerid_admin_user,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
+
             return response()->json([
                 'message' => 'Success',
             ], 201);
