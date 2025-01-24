@@ -62,7 +62,7 @@ class AuthController extends Controller
             ]);
 
             $user = User::where('email', $request->email)
-             ->first(['id','name','email','city','password']);
+             ->first(['id','name','email','city','password','onesignal_playerid']);
 
             if (!$user || !Hash::check($request->password, $user->password)) {
 
