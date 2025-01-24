@@ -75,8 +75,8 @@ class AuthController extends Controller
                 // ];
             }
 
-            if($request->onesignal_id){
-                $user->onesignal_playerid = $request->onesignal_id;
+            if($request->one_signal_id){
+                $user->onesignal_playerid = $request->one_signal_id;
                 $user->save();
 
                 OneSignal::sendNotificationToUser(
