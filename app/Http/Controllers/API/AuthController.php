@@ -81,7 +81,7 @@ class AuthController extends Controller
 
                 OneSignal::sendNotificationToUser(
                     "أهلا بك ($user->name) في ميراج",
-                    $request->onesignal_id,
+                    $request->one_signal_id,
                     $url = null,
                     $data = null,
                     $buttons = null,
