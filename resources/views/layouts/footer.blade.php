@@ -76,7 +76,7 @@
 <!-- End Footer -->
 <!-- Start Loader & Back To Top -->
 <div id="preloader"></div>
-<a href="#" class="call-whatsapp"><i class="fab fa-whatsapp"></i></a>
+<a href="https://api.whatsapp.com/send?phone={{$settings_info['whatsapp']}}" class="call-whatsapp"><i class="fab fa-whatsapp"></i></a>
 <a href="#header" class="back-to-top">
     <i class="fas fa-arrow-up"></i></a>
 <!-- End Loader & Back To Top -->

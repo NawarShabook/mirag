@@ -22,7 +22,7 @@
 
                 @endif --}}
             @else
-            <a class="p-2 p-lg-3 a-link {{ request()->routeIs('profile') ? 'bg-active' : '' }}"  title="الملف الشخصي" aria-current="page" href="{{ route('profile') }}"><i
+            <a class="p-2 p-lg-3 a-link {{ request()->routeIs('profile')||request()->Is('change-password')||request()->Is('delete-account') ? 'bg-active' : '' }}"  title="الملف الشخصي" aria-current="page" href="{{ route('profile') }}"><i
                     class="fas fa-user"></i></a>
             @endguest
 

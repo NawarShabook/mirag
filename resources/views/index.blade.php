@@ -12,6 +12,11 @@
     <p class="p-10 rad-10 m-20 bg-red c-white" style="color:white">{{session('error')}}</p>
 @endif
 @endif
+
+@if(session('delete_success'))
+<p class="p-10 rad-10 m-auto text-center bg-green c-white w-50">تم حذف الحساب بنجاح</p>
+
+@endif
     <!-- Start Tags -->
     <div class="container mb-5" id="maintenance_service">
         <div class="row">

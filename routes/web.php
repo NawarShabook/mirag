@@ -42,6 +42,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserProfileController::class, 'profile'])
     ->name('profile');
 
+    Route::get('/delete-account', [UserProfileController::class, 'show_delete_account'])
+    ->name('delete-account.show');
+
+    Route::post('/delete-account', [UserProfileController::class, 'delete_account'])
+    ->name('delete-account.destroy');
+
 });
 
 Route::middleware(['isAdmin'])->group(function () {

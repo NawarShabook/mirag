@@ -35,6 +35,9 @@
                                 <a class="text-white mb-4 h6" href="#"><i
                                         class="fa fa-hands-helping ml-3 active"></i>مساعدة</a>
 
+                                <a class="text-white mb-4 h6" href="{{route('delete-account.show')}}"><i
+                                        class="fa fa-ban ml-3 active"></i>حذف الحساب</a>
+
                                 <a class="text-danger mb-4 h6" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                      <i class="fas fa-power-off ml-3 active"></i>تسجيل الخروج</a>
