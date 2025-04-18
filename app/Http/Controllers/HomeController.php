@@ -72,4 +72,21 @@ class HomeController extends Controller
         return view('admin_overview',compact('orders','categories'));
 
     }
+    public function mobile_app_download()
+    {
+        return view('mobile_app_download');
+    }
+    public function download_app()
+    {
+        $pathToFile='download/Mirag.apk';
+        $name='Mirag';
+        // return response()->download($pathToFile, $name);
+
+        return response()->file($pathToFile ,[
+            'Content-Type'=>'application/vnd.android.package-archive',
+            'Content-Disposition'=> 'attachment; filename="Mirag.apk"',
+        ]) ;
+
+
+    }
 }

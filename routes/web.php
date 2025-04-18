@@ -17,6 +17,12 @@ Route::get('/', [HomeController::class,'index']);
 Route::get('/home', [HomeController::class, 'index'])
 ->name('home');
 
+Route::get('/mobile-app-download', [HomeController::class, 'mobile_app_download'])
+->name('mobile-app-download');
+
+Route::get('/download-app', [HomeController::class, 'download_app'])
+->name('download-app');
+
 Route::resource('posts', PostController::class);
 
 Auth::routes([
