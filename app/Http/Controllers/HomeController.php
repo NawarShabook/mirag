@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\HeavyMachine;
 use App\Models\Workshop;
 use App\Models\MaintenanceService;
+use Illuminate\Support\Facades\File;
 
 class HomeController extends Controller
 {
@@ -78,14 +79,16 @@ class HomeController extends Controller
     }
     public function download_app()
     {
-        $pathToFile='download/Mirag.apk';
-        $name='Mirag';
-        // return response()->download($pathToFile, $name);
 
-        return response()->file($pathToFile ,[
-            'Content-Type'=>'application/vnd.android.package-archive',
-            'Content-Disposition'=> 'attachment; filename="Mirag.apk"',
-        ]) ;
+        $filePath = public_path('download/Mirag.apk');
+
+        if (!File::exists($filePath)) {
+            abort(404, 'APK not found');
+        }
+
+        return response()->download($filePath, 'Mirag.apk', [
+            'Content-Type' => 'application/vnd.android.package-archive',
+        ]);
 
 
     }
