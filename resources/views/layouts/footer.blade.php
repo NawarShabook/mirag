@@ -38,7 +38,7 @@
                             <a class="text-white mb-2" href="/#last-works"><i class="fa fa-angle-left ml-2 active"></i>آخر
                                 الأخبار</a>
 
-                            <a class="text-white mb-2" href="{{route('mobile-app-download')}}"><i
+                            <a class="text-white mb-2" href="{{route('download')}}"><i
                                     class="fa fa-angle-left ml-2 active"></i>نزل التطبيق الآن</a>
 
                             <a class="text-white mb-2" href="#"><i

@@ -18,7 +18,7 @@ Route::get('/home', [HomeController::class, 'index'])
 ->name('home');
 
 Route::get('/download', [HomeController::class, 'mobile_app_download'])
-->name('mobile-app-download');
+->name('download');
 
 Route::get('/download-app', [HomeController::class, 'download_app'])
 ->name('download-app');

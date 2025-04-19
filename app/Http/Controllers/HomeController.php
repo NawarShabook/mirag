@@ -80,7 +80,7 @@ class HomeController extends Controller
     public function download_app()
     {
 
-        $filePath = public_path('download/Mirag.apk');
+        $filePath = public_path('mobile_app/Mirag.apk');
 
         if (!File::exists($filePath)) {
             abort(404, 'APK not found');
